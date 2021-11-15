@@ -1,0 +1,38 @@
+{
+  "name": "my-vue-app",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite --mode dev",
+    "pre": "vite --mode pre",
+    "test": "vite --mode test",
+    "ga": "vite --mode ga",
+    "mock":"vite --mode mock",
+    "build": "vue-tsc --noEmit && vite build",
+    "build:mock": "vue-tsc --noEmit && vite build --mode mock",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "element-plus": "^1.2.0-beta.3",
+    "lodash": "^4.17.21",
+    "qs": "^6.10.1",
+    "vant": "^3.0.2",
+    "vue": "^3.2.16",
+    "vue-router": "^4.0.6",
+    "vuex": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "@types/qs": "^6.9.7",
+    "@types/vue": "^2.0.0",
+    "@vitejs/plugin-vue": "^1.9.3",
+    "@vitejs/plugin-vue-jsx": "^1.2.0",
+    "less": "^4.1.2",
+    "path": "^0.12.7",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.14",
+    "vite-plugin-mock": "^2.9.6",
+    "vite-plugin-style-import": "^1.3.0",
+    "vue-tsc": "^0.3.0"
+  }
+}
