@@ -1,5 +1,1 @@
-
-
-
-export const RANDOMDATA = "/assets/json/random-data.json"
-
+export const RANDOMDATA = '/assets/json/random-data.json';

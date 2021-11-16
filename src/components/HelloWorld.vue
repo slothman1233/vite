@@ -1,5 +1,3 @@
-
-
 <template>
   <h1>{{ msg }}</h1>
 
@@ -16,7 +14,7 @@
     <el-button type="info">Inf45o</el-button>
     <el-button type="warning">War3ning</el-button>
     <el-button type="danger">Danger</el-button>
-    <el-button>中文1</el-button>   
+    <el-button>中文1</el-button>
   </el-row>
 
   <van-button type="default">默认按钮</van-button>
@@ -32,62 +30,61 @@
 </template>
 
 <script lang="ts">
-import { App } from "store/mutation-types";
-import { getrandom } from "services/randomDataService/randomData";
-import { useStore } from "store/index";
-import { ref, defineComponent, computed, onMounted } from "vue";
-// defineProps<{ msg: string }>();
-export default defineComponent({
-  name: "HelloWorld",
-  props: {
-    msg: {
-      type: String,
-      default: "默认msgs",
-      require: true,
+  import { App } from 'store/mutation-types';
+  import { getrandom } from 'services/randomDataService/randomData';
+  import { useStore } from 'store/index';
+  import { ref, defineComponent, computed, onMounted } from 'vue';
+  // defineProps<{ msg: string }>();
+  export default defineComponent({
+    name: 'HelloWorld',
+    props: {
+      msg: {
+        type: String,
+        default: '默认msgs',
+        require: true,
+      },
     },
-  },
-  setup: (prop) => {
-    // console.log(prop.msg)
-    const counts = ref(0);
+    setup: (prop) => {
+      // console.log(prop.msg)
+      const counts = ref(0);
 
-    const store = useStore();
+      const store = useStore();
 
-    // let a = await getrandom()
-    // console.log(a)
+      // let a = await getrandom()
+      // console.log(a)
 
-    onMounted(async () => {
-      let a = await getrandom();
-       console.log(a);
-    });
+      onMounted(async () => {
+        let a = await getrandom();
+        console.log(a);
+      });
 
-    const count: any = computed({
-      get() {
-        return store.state.app.count;
-      },
-      set(value) {
-        store.dispatch(App.action.CHANGECOUNT, value);
-      },
-    });
-    return { count };
-  },
-});
+      const count: any = computed({
+        get() {
+          return store.state.app.count;
+        },
+        set(value) {
+          store.dispatch(App.action.CHANGECOUNT, value);
+        },
+      });
+      return { count };
+    },
+  });
 </script>
 
 <style scoped>
-a {
-  color: #42b983;
-}
+  a {
+    color: #42b983;
+  }
 
-label {
-  margin: 0 0.5em;
-  font-weight: bold;
-}
+  label {
+    margin: 0 0.5em;
+    font-weight: bold;
+  }
 
-code {
-  background-color: #eee;
-  padding: 2px 4px;
-  border-radius: 4px;
-  color: #304455;
-}
+  code {
+    background-color: #eee;
+    padding: 2px 4px;
+    border-radius: 4px;
+    color: #304455;
+  }
 </style>
-

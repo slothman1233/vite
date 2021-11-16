@@ -1,10 +1,9 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import type { App } from 'vue'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import type { App } from 'vue';
 
-const routerHistory = createWebHashHistory()
+const routerHistory = createWebHashHistory();
 
-const Layout = () => import('@/layout/index.vue')
-
+const Layout = () => import('@/layout/index.vue');
 
 // // Auto generates routes from vue files under ./views
 // // https://vitejs.dev/guide/features.html#glob-import
@@ -18,50 +17,45 @@ const Layout = () => import('@/layout/index.vue')
 // })
 
 const routes = [
-    {
-
-        path: '/',
-        redirect: '/home',
-        component: Layout,
-        children: [
-            {
-                path: '/home',
-                component: () =>
-                    import(
-                        /* webpackChunkName: "home" */ '@/views/index.vue'
-                    ),
-                name: 'Home',
-                meta: {
-                    auth: ['admin', 'test'],
-                    icon: 'carbon:rule-test',
-                    isAffix: true,
-                    isHide: false,
-                    isKeepAlive: true,
-                    title: '首页',
-                    index: '1'
-                },
-            },
-        ],
-
-    },
-]
+  {
+    path: '/',
+    redirect: '/home',
+    component: Layout,
+    children: [
+      {
+        path: '/home',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/index.vue'),
+        name: 'Home',
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'carbon:rule-test',
+          isAffix: true,
+          isHide: false,
+          isKeepAlive: true,
+          title: '首页',
+          index: '1',
+        },
+      },
+    ],
+  },
+];
 
 const router = createRouter({
-    history: routerHistory,
-    routes: routes
-})
+  history: routerHistory,
+  routes: routes,
+});
 
 // 删除/重置路由
 export function resetRoute(): void {
-    router.getRoutes().forEach((route) => {
-        const { name } = route
-        if (name) {
-            router.hasRoute(name) && router.removeRoute(name)
-        }
-    })
+  router.getRoutes().forEach((route) => {
+    const { name } = route;
+    if (name) {
+      router.hasRoute(name) && router.removeRoute(name);
+    }
+  });
 }
 
 export function setupRouter(app: App<Element>): void {
-    app.use(router)
+  app.use(router);
 }
-export default router
+export default router;

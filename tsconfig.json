@@ -45,9 +45,13 @@
   "typeRoots": [
     "./node_modules/@types/",
     "./types"
+    
+    
   ], // 声明文件目录，默认时node_modules/@types
   //指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）
   "include": [
+    "vite.config.ts",
+    "config/**/*.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
