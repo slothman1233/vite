@@ -1,47 +1,64 @@
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv } from 'vite';
 
-
-import path from 'path'
-import proxy from './config/viteConfig/proxy'
-import plugins from './config/viteConfig/plugins/plugins'
+import path from 'path';
+import proxy from './config/viteConfig/proxy';
+import plugins from './config/viteConfig/plugins/plugins';
 // https://vitejs.dev/config/
 
+import { wrapperEnv } from './src/common/utils/env';
 
-import { wrapperEnv } from './src/utils/env'
+import autoprefixer from 'autoprefixer';
 
 //env根路径
-const envDir = path.resolve(process.cwd(), "config/env")
+const envDir = path.resolve(process.cwd(), 'config/env');
 
 export default defineConfig(({ command, mode }) => {
-  const isBuild = command === 'build'
+  const isBuild = command === 'build';
 
-  const env = loadEnv(mode, envDir)
+  const env = loadEnv(mode, envDir);
 
-  const viteEnv = wrapperEnv(env)
+  const viteEnv = wrapperEnv(env);
 
+  const isProduction = isBuild && (mode === 'mock' || mode === 'ga');
 
-  const isProduction = mode === 'production'
-
-
-  const { VITE_OUTDIR, VITE_PORT, VITE_PUBLIC_PATH, VITE_USE_MOCK, VITE_PUBLICDIR, VITE_PUBLICDIR_OUT, VITE_HOST } = viteEnv
+  const {
+    VITE_OUTDIR,
+    VITE_PORT,
+    VITE_PUBLIC_PATH,
+    VITE_PUBLICDIR,
+    VITE_PUBLICDIR_OUT,
+    VITE_HOST,
+  } = viteEnv;
 
   return {
+    css: {
+      postcss: {
+        plugins: [
+          //自动补全
+          //规则在 package.json -> browserslist 中
+          autoprefixer({
+            add: true,
+            grid: true,
+          }),
+        ],
+      },
+      preprocessorOptions: {
+        // scss: {
+        //   additionalData: '@import "./src/assets/style/index.scss";'
+        // }
 
-
-    // 引用全局 scss
-    cssPreprocessOptions: {
-      // scss: {
-      //   additionalData: '@import "./src/assets/style/index.scss";'
-      // }
+        //注入全局less变量
+        less: {
+          javascriptEnabled: true,
+          additionalData: `@import (reference) "./src/styles/public/common/index.less";`,
+        },
+      },
     },
-
-
     /**
-   * 在生产环境中提供的基本公共路径。
-   * @default '/'
-   */
+     * 在生产环境中提供的基本公共路径。
+     * @default '/'
+     */
     base: VITE_PUBLIC_PATH,
-
 
     resolve: {
       // 目录别名
@@ -60,7 +77,7 @@ export default defineConfig(({ command, mode }) => {
     publicDir: VITE_PUBLICDIR,
 
     root: (() => {
-      return process.cwd()
+      return process.cwd();
     })(),
 
     server: {
@@ -81,27 +98,49 @@ export default defineConfig(({ command, mode }) => {
     },
 
     build: {
+      //浏览器兼容性
+      target: 'es2015',
+
       // 压缩
-      minify: isProduction ? "esbuild" : false,
+      minify: isProduction ? 'esbuild' : false,
+
       //静态文件的输出目录
       assetsDir: VITE_PUBLICDIR_OUT,
+
       // 进行压缩计算
       reportCompressedSize: false,
+
       /**
        * 输出目录
        * @default 'dist'
        */
       outDir: VITE_OUTDIR,
 
-      // rollupOptions: {
-      //   input: {
-      //     main: path.resolve(__dirname, 'index.html'),
-      //     aa: path.resolve(__dirname, 'html/aa/aa.html')
-      //   }
-      // },
+      // manifest: true,
 
+      rollupOptions: {
+        //js 和 css 分包
+        output: {
+          chunkFileNames: 'static/js/[name]-[hash].js',
+          entryFileNames: 'static/js/[name]-[hash].js',
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+        },
+
+        // 多入口文件打包
+        // input: {
+        //   main: path.resolve(__dirname, 'index.html'),
+        //   aa: path.resolve(__dirname, 'html/aa/aa.html')
+        // }
+      },
+
+      // 生产环境移除console
+      terserOptions: {
+        compress: {
+          drop_console: isBuild,
+          drop_debugger: isBuild,
+        },
+      },
     },
-    plugins: plugins(isBuild, mode, VITE_USE_MOCK),
-
-  }
-})
+    plugins: plugins(isBuild, <viteMode>mode, viteEnv),
+  };
+});

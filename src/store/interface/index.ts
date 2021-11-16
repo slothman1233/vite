@@ -1,23 +1,16 @@
-import { defineComponent } from 'vue'
-import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router'
+import { defineComponent } from 'vue';
+import type { RouteRecordNormalized, RouteRecordRaw } from 'vue-router';
 
-
-
-type Component<T extends any = any> =
+type Component<T = any> =
   | ReturnType<typeof defineComponent>
   | (() => Promise<typeof import('*.vue')>)
-  | (() => Promise<T>)
-
-
-
+  | (() => Promise<T>);
 
 export interface App {
-  count: number
+  count: number;
 }
 
 // 主接口(顶级类型声明)
 export interface RootStateTypes {
-  app: App
-  
+  app: App;
 }
-

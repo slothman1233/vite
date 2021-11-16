@@ -1,5 +1,5 @@
 // 按需加载element
-import type { App } from 'vue'
+import type { App } from 'vue';
 
 // import {
 //   ElAlert,
@@ -90,8 +90,6 @@ import type { App } from 'vue'
 // import locale from 'element-plus/lib/locale'
 // import lang from 'element-plus/lib/locale/lang/zh-cn'
 
-
-
 // const components = [
 //   ElAlert,
 //   ElAside,
@@ -181,11 +179,11 @@ import type { App } from 'vue'
 //   ElNotification
 // ]
 
- import ElementPlus from'element-plus'
+import ElementPlus from 'element-plus';
 
 export function setupElementPlus(app: App<Element>): void {
-// 设置语言
-// locale.use(lang)
+  // 设置语言
+  // locale.use(lang)
   // components.forEach((component: any) => {
   //   app.component(component.name, component)
   // })
@@ -193,8 +191,8 @@ export function setupElementPlus(app: App<Element>): void {
   // plugins.forEach((plugin: any) => {
   //   app.use(plugin)
   // })
-  
-  app.use(ElementPlus);  
+
+  app.use(ElementPlus);
   // 全局配置
-  app.config.globalProperties.$ELEMENT = { size: 'small', zIndex: 3000 }
+  app.config.globalProperties.$ELEMENT = { size: 'small', zIndex: 3000 };
 }

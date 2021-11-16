@@ -25,9 +25,7 @@ declare type ComponentRef<T extends HTMLElement = HTMLDivElement> = ComponentElR
 
 declare type ElRef<T extends HTMLElement = HTMLDivElement> = Nullable<T>;
 
-
-declare type Recordable<T = any> = Record<string, T>
-
+declare type Recordable<T = any> = Record<string, T>;
 
 declare module '*.vue' {
   import { defineComponent } from 'vue';
@@ -35,9 +33,9 @@ declare module '*.vue' {
   export default Component;
 }
 
-declare module 'path-browserify'
-declare module 'nprogress'
-declare module '@iconify/vue'
-declare module 'element-plus'
+// declare module 'path-browserify'
+// declare module 'nprogress'
+declare module '@iconify/vue';
+declare module 'element-plus';
 
-
+declare type viteMode = 'dev' | 'test' | 'pre' | 'ga' | 'mock';
