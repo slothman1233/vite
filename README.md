@@ -81,7 +81,10 @@ npm run serve ----- 运行生产代码
 │   │   ├── env.d.ts  env 全局配置声明文件
 │   │   ├── index.d.ts  全局声明
 │   │   └── window.d.ts  window的ts声明
-├── tsconfig.json ts的配置文件
+├── .eslintignore  eslint 排除文件
+├── .eslintrc.js    eslint  配置
+├── prettier.config.js  prettier配置
+├── postcss.config.js   postcss配置（废弃，直接在vite.config.ts中的css配置）
 └── vite.config.ts vite 服务配置
 
 ```
