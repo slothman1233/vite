@@ -7,7 +7,7 @@
 npm run dev     -----  运行dev环境
 npm run test  -----  运行test 环境
 npm run pre -----  运行pre 环境
-npm run ga  -----  运行ga 环境
+npm run prod  -----  运行prod 环境
 npm run mock  -----  运行mock数据的环境
 npm run build ----- 打包生产代码
 npm run build:mock ----- 打包生产代码带mock的

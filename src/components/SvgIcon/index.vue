@@ -25,7 +25,7 @@
       },
       iconColor: {
         type: String,
-        default: '#333',
+        default: '#889aa4',
       },
     },
     setup(props: Props) {
@@ -48,8 +48,8 @@
 
 <style scoped>
   .svg-icon {
-    width: 4em;
-    height: 4em;
+    width: 1em;
+    height: 1em;
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;

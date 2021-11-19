@@ -1,3 +1,5 @@
+type debounceNextFunc = (args?: Array<any>, result?: any) => void;
+
 export class Utils {
   /**
    * 生成随机字符串
@@ -37,42 +39,62 @@ export class Utils {
 
   /**
    * 防抖
-   * @param {Function} func
-   * @param {number} wait
-   * @param {boolean} immediate
+   * @param {Function} func 执行函数
+   * @param {number} wait 延迟时间
+   * @param {boolean} immediate 是否立刻执行
+   * @param {debounceNextFunc} nextFunc func 执行完后的回调 回调里面包含两个值 第一个是个数组 传过来的参数   第二个是func的返回值
    * @return {*}
    */
-  public static debounce(func: Function, wait: number, immediate = false) {
-    let timeout: any, args: any, context: any, timestamp: number, result: any;
+  public static debounce(
+    func: Function,
+    wait: number,
+    immediate = false,
+    nextFunc?: debounceNextFunc,
+  ) {
+    let timer: any = null,
+      context: any,
+      timestamp = 0,
+      result: any;
 
-    const later = function () {
-      // 据上一次触发时间间隔
-      const last = +new Date() - timestamp;
-
-      // 上次被包装函数被调用时间间隔 last 小于设定时间间隔 wait
-      if (last < wait && last > 0) {
-        timeout = setTimeout(later, wait - last);
-      } else {
-        timeout = null;
-        // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
-        if (!immediate) {
-          result = func.apply(context, args);
-          if (!timeout) context = args = null;
-        }
-      }
+    const later = function (...args: any) {
+      result = func.apply(context, args);
+      nextFunc && nextFunc.apply(context, [args, result]);
     };
+
+    const immediateFunc = function (...args: any) {
+      const newTimeData = +new Date();
+      if (newTimeData - timestamp >= wait) {
+        result = func.apply(context, args);
+        nextFunc && nextFunc.apply(context, [args, result]);
+      }
+      timestamp = newTimeData;
+    };
+
     return (...args: any) => {
       context = this;
-      timestamp = +new Date();
-      const callNow = immediate && !timeout;
-      // 如果延时不存在，重新设定延时
-      if (!timeout) timeout = setTimeout(later, wait);
-      if (callNow) {
-        result = func.apply(context, args);
-        context = args = null;
+
+      //立刻执行
+      if (immediate) {
+        immediateFunc();
+        return;
       }
 
-      return result;
+      if (timer !== null) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(later.bind(context, ...args), wait);
     };
   }
 }
+
+/**
+ * 获取链接的参数
+ * @param {String} name 参数名
+ * @return {String} 对应参数名的值  不存在返回null
+ */
+export const GetQueryString = function (name: string) {
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+  const r = window.location.search.substr(1).match(reg);
+  if (r != null) return r[2];
+  return null;
+};

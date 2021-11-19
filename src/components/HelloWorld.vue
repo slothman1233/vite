@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-  import { App } from 'store/mutation-types';
+  import mutationTypes from 'store/mutation-types';
   import { getrandom } from 'services/randomDataService/randomData';
   import { useStore } from 'store/index';
   import { ref, defineComponent, computed, onMounted } from 'vue';
@@ -54,8 +54,8 @@
       // console.log(a)
 
       onMounted(async () => {
-        let a = await getrandom();
-        console.log(a);
+        // let a = await getrandom();
+        // console.log(a);
       });
 
       const count: any = computed({
@@ -63,7 +63,7 @@
           return store.state.app.count;
         },
         set(value) {
-          store.dispatch(App.action.CHANGECOUNT, value);
+          store.dispatch(mutationTypes.action.CHANGECOUNT, value);
         },
       });
       return { count };

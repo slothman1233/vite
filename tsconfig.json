@@ -37,6 +37,7 @@
       "store/*": [
         "src/store/*"
       ],
+      "model/*":["src/model/*"],
       "mock/*": [
         "mock/*"
       ],
@@ -59,5 +60,6 @@
     "mock/**/*.ts",
     "types/**/*.d.ts",
     "types/**/*.ts",
-  ]
+  ],
+  "exclude": ["node_modules"]
 }

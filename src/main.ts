@@ -1,7 +1,7 @@
-import { createApp } from 'vue';
-import App from './App';
+import app from './App';
 // import ElementPlus from 'element-plus'
 // import router from './router/index'
+
 import router, { setupRouter } from './router'; // 路由
 import { setupElementPlus } from './common/utils/libs/element';
 import { setupVant } from './common/utils/libs/vant';
@@ -11,16 +11,10 @@ import './styles/plugin/index.less';
 import './styles/public/index.less';
 import { setupGlobalCom } from 'comps/index';
 import 'virtual:svg-icons-register';
+import 'nprogress/nprogress.css';
+import './permission'; // permission control
 
-//不能修改
-import env from '@/common/config/dev';
-
-const app = createApp(App);
-
-// app.config.globalProperties.$configmodel = import.meta.env.VITE_PROJECT_ENV;
-
-window.configModel = env;
-
+// export const PROJECT_ID = process.env.VUE_APP_PROJECT_ID;
 setupRouter(app); // 引入路由
 
 setupStore(app); // 引入状态管理

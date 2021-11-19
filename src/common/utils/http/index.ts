@@ -11,8 +11,8 @@ export interface Codes {
   sures?: Array<string>;
   err?: Array<string>;
 }
+// UI插件
 export type ReqBaseConfig = {
-  // UI插件
   msgUI?: any;
   // 登出方法
   logout?: any;
@@ -57,6 +57,7 @@ export interface ResponseData<T> {
   code: number | string;
   subCode: string;
   bodyMessage: T;
+  message: string;
 }
 
 const HEADERS_MAP = new Map([

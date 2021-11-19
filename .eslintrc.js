@@ -35,6 +35,13 @@ module.exports = {
         ignores: [],
       },
     ],
+    // 'vue/multi-word-component-names'
+    '@typescript-eslint/ban-ts-comment': [
+      'error',
+      {
+        'ts-ignore': false,
+      },
+    ],
   },
   overrides: [
     {

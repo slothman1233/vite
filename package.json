@@ -5,9 +5,9 @@
     "dev": "vite --mode dev",
     "pre": "vite --mode pre",
     "test": "vite --mode test",
-    "ga": "vite --mode ga",
+    "prod": "vite --mode prod",
     "mock": "vite --mode mock",
-    "build": "vue-tsc --noEmit && vite build --mode ga",
+    "build": "vue-tsc --noEmit && vite build --mode prod",
     "build:mock": "vue-tsc --noEmit && vite build --mode mock",
     "serve": "vite preview"
   },
@@ -20,11 +20,12 @@
     "> 1%",
     "last 2 versions"
   ],
-  
   "dependencies": {
     "axios": "^0.24.0",
+    "blueimp-md5": "^2.19.0",
     "element-plus": "^1.2.0-beta.3",
     "lodash": "^4.17.21",
+    "nprogress": "^0.2.0",
     "qs": "^6.10.1",
     "vant": "^3.0.2",
     "vite-plugin-compression": "^0.3.5",
@@ -34,7 +35,9 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/blueimp-md5": "^2.18.0",
     "@types/node": "^16.11.7",
+    "@types/nprogress": "^0.2.0",
     "@types/qs": "^6.9.7",
     "@types/vue": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.4.0",

@@ -11,12 +11,23 @@
 
 <script lang="ts">
   import HelloWorld from 'comps/HelloWorld.vue';
-  import { defineComponent } from 'vue';
-
+  import { defineComponent, getCurrentInstance } from 'vue';
   export default defineComponent({
     name: 'ViewsHome',
+    props: {
+      num: {
+        // type: String,
+        // default: '默认msgs',
+        // require: true,
+      },
+    },
     components: { HelloWorld },
-    setup(prop) {
+    setup(prop, ctx) {
+      // prop.num
+      const instance = getCurrentInstance();
+      console.log(instance?.appContext.config.globalProperties.$route.query);
+      // const { proxy } = getCurrentInstance();
+      console.log(ctx);
       return {
         msg: 'hello World',
       };
