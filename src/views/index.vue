@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HelloWorld :msg="msg"></HelloWorld>
+    <!-- <HelloWorld :msg="msg"></HelloWorld> -->
   </div>
 
   <div>
@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-  import HelloWorld from 'comps/HelloWorld.vue';
+  // import HelloWorld from 'comps/HelloWorld.vue';
   import { defineComponent, getCurrentInstance } from 'vue';
   export default defineComponent({
     name: 'ViewsHome',
@@ -21,13 +21,8 @@
         // require: true,
       },
     },
-    components: { HelloWorld },
     setup(prop, ctx) {
-      // prop.num
       const instance = getCurrentInstance();
-      console.log(instance?.appContext.config.globalProperties.$route.query);
-      // const { proxy } = getCurrentInstance();
-      console.log(ctx);
       return {
         msg: 'hello World',
       };

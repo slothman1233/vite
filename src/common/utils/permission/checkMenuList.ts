@@ -1,5 +1,3 @@
-import { RouteRecordRaw } from 'vue-router';
-
 export type Menu = {
   id: number;
   parentId: number;
@@ -24,7 +22,7 @@ export type Menu = {
 //   return checkMenuList(data);
 // }
 
-function checkMenuList(list: Menu[], routes: RouteRecordRaw[]): object[] {
+function checkMenuList(list: Menu[], routes: AppRouteRecordRaw[]): object[] {
   if (!list) return [];
   const _routes: object[] = [];
   list.forEach((item) => {

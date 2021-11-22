@@ -1,7 +1,5 @@
-import { routes } from '@/router';
 import service from '@/services/https';
 import md5 from 'blueimp-md5';
-import checkMenuList, { Menu } from './tovue';
 import { getCacheCheckTime, setCacheAddTime } from './utils';
 /**
  * @param {string} username 用户名
@@ -58,10 +56,6 @@ async function login(data: LoginParams): Promise<any> {
   setUserInfoCache(JSON.stringify(userInfoData));
 
   if (!userInfoData) return;
-
-  //routes
-
-  checkMenuList(userInfoData.menuList, routes);
 
   return userInfoData || undefined;
 }

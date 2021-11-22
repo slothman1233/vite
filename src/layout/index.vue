@@ -1,21 +1,46 @@
 <template>
   <div class="home-layout">
+    <SildeBar :collapse="isCollapse" :routes="routes" />
     <div class="con-box">
-      <Header />
-
+      <HeaderNav />
+      <Breadcrumb :collapse="isCollapse" @toggleSideBar="toggleSideBar" />
       <router-view class="app-con"></router-view>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import Header from '@/layout/component/header.vue';
+  import { getUserInfoCache } from '@/common/utils/permission';
+  import { reactive, toRefs } from 'vue';
+  import checkMenuList, { Menu } from '@/common/utils/permission/checkMenuList';
+  import { statroutes } from '@/router';
+  import HeaderNav from './component/HeaderNav/index.vue';
 
   export default {
     name: 'DefaultLayout',
-    components: { Header },
+    components: { HeaderNav },
     setup() {
-      return {};
+      const staticData = reactive({
+        isCollapse: false,
+        routes: [],
+      });
+
+      const refData = toRefs(staticData);
+
+      const getUserInfo = JSON.parse(getUserInfoCache() || '');
+
+      const menuList: Menu[] = getUserInfo.menuList;
+
+      refData.routes.value = checkMenuList(menuList, statroutes) as never[];
+
+      const toggleSideBar = () => {
+        refData.isCollapse.value = !refData.isCollapse.value;
+      };
+
+      return {
+        ...refData,
+        toggleSideBar,
+      };
     },
   };
 </script>

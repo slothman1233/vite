@@ -13,6 +13,7 @@ import { setupGlobalCom } from 'comps/index';
 import 'virtual:svg-icons-register';
 import 'nprogress/nprogress.css';
 import './permission'; // permission control
+import { setupLayoutCom } from './layout/component';
 
 // export const PROJECT_ID = process.env.VUE_APP_PROJECT_ID;
 setupRouter(app); // 引入路由
@@ -24,6 +25,8 @@ setupElementPlus(app); // 引入element组件
 setupVant(app); // 引入vant组件
 
 setupGlobalCom(app); // 注册全局公用组件
+
+setupLayoutCom(app); //layout组件注入
 
 router.isReady().then(() => {
   app.mount('#app');

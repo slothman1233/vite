@@ -8,6 +8,7 @@
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
+    "suppressImplicitAnyIndexErrors":true,
     "esModuleInterop": true, /* 通过为所有导入创建命名空间对象，实现CommonJS和ES模块之间的互操作性 */
     // "isolatedModules": true,
     "skipLibCheck": true /* 跳过声明文件的类型检查. */,

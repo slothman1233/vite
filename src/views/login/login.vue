@@ -57,8 +57,8 @@
   import { Utils } from '@/common/utils';
   import { login } from '@/common/utils/permission';
   import { ElMessage } from 'element-plus';
-  import { defineComponent, getCurrentInstance, reactive, ref, unref, nextTick, toRefs } from 'vue';
-  import { getrandom } from 'services/randomDataService/randomData';
+  import { defineComponent, reactive, ref, unref, nextTick, toRefs } from 'vue';
+  import { useRouter } from 'vue-router';
   // import { useRouter } from 'vue-router';
   const TITLE_MAP = new Map<string, string>([
     ['dev', '开发环境-'],
@@ -83,7 +83,7 @@
       // getrandom().then((a) => {
       //   console.log(a);
       // });
-
+      const router = useRouter();
       let staticData = reactive({
         isloading: false,
         passwordType: 'password',
@@ -101,8 +101,8 @@
       //双向绑定
 
       //获取vue上面的全局变量
-      const instance = getCurrentInstance();
-      let that = instance?.appContext.config.globalProperties;
+      // const instance = getCurrentInstance();
+      // let that = instance?.appContext.config.globalProperties;
 
       //点击显示密码的按钮
       let showPwd = () => {
@@ -126,7 +126,7 @@
         let data = await res[1];
         if (!data) return;
 
-        that?.$router.replace('/').catch((e: any) => console.log(e));
+        router.replace('/').catch((e: any) => console.log(e));
       };
 
       //登录

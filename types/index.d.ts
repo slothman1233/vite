@@ -30,6 +30,7 @@ declare type Recordable<T = any> = Record<string, T>;
 // declare module 'path-browserify'
 declare module 'nprogress';
 declare module '@iconify/vue';
-declare module 'element-plus';
+// declare module 'element-plus';
+// declare module '@element-plus/icons';
 
 declare type viteMode = 'dev' | 'test' | 'pre' | 'prod' | 'mock';
