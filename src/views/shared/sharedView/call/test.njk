@@ -1,0 +1,19 @@
+
+
+
+
+{#
+  add（包含call方法）
+#}
+
+{% macro add(x, y) %}
+  {{ caller() }}: {{ x + y }}
+  {% endmacro%}
+
+  {# 
+{% call add(1, 2) %}
+  The result is
+{% endcall %} 
+
+"The result is: 3"。
+#}

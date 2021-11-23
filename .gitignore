@@ -1,6 +1,8 @@
-node_modules
-.DS_Store
+build
 dist
-dist-ssr
-*.local
-pkg
+node_modules
+logs
+public/upload/**/*.*
+*.log
+.DS_Store
+coverage

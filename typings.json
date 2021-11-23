@@ -1,0 +1,9 @@
+{
+  "globalDevDependencies": {
+    "jest": "registry:dt/jest#19.2.0+20170312200138"
+  },
+  "globalDependencies": {
+    "koa-compress": "registry:dt/koa-compress#2.0.0+20161219223325",
+    "reflect-metadata": "registry:dt/reflect-metadata#0.0.0+20161005184000"
+  }
+}

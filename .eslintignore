@@ -1,4 +1,6 @@
-/node_modules/
-/public/
-.vscode
-.idea
+node_modules
+logs
+coverage
+typings
+dist
+src/views
