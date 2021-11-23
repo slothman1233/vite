@@ -85,7 +85,7 @@
         return basePath + '/' + path;
       };
 
-      const navData = (): Array<NavData> => {
+      const navData = (): Array<any> => {
         const routers: Array<any> = prop?.routes as Array<any>;
         return parseRouteForBar(routers);
       };

@@ -1,7 +1,6 @@
 import { routes } from '@/router/index';
 import { Module } from 'vuex';
 import { permissionListState, RootStateTypes } from 'store/interface/index';
-import { RouteRecordRaw } from 'vue-router';
 import mutationTypes from '../mutation-types';
 
 const permissionModule: Module<permissionListState, RootStateTypes> = {
@@ -12,7 +11,7 @@ const permissionModule: Module<permissionListState, RootStateTypes> = {
   mutations: {
     [mutationTypes.mutations.SET_ROUTES]: (state, route) => {
       state.addRoutes = route;
-      let resRoutelist: RouteRecordRaw[] = routes.filter((e) => e.name !== 'root');
+      let resRoutelist: AppRouteRecordRaw[] = routes.filter((e) => e.name !== 'root');
       const getRootList = routes.find((e) => e.name === 'root');
       if (getRootList && getRootList !== undefined) {
         resRoutelist = resRoutelist.concat(getRootList.children ? getRootList.children : []);

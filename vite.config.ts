@@ -137,8 +137,8 @@ export default defineConfig(({ command, mode }) => {
       // 生产环境移除console
       terserOptions: {
         compress: {
-          // drop_console: isBuild,
-          // drop_debugger: isBuild,
+          drop_console: isBuild,
+          drop_debugger: isBuild,
         },
       },
     },
