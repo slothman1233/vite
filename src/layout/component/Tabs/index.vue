@@ -19,7 +19,7 @@
 
 <script lang="ts">
   import { settings } from 'nprogress';
-  import { defineComponent, reactive, toRefs, watch } from 'vue';
+  import { defineComponent, onMounted, reactive, toRefs, watch } from 'vue';
   import { useRoute, useRouter } from 'vue-router';
   export default defineComponent({
     name: 'layoutTabs',
@@ -39,9 +39,11 @@
           setTabs(route);
         },
       );
+      onMounted(() => {
+        setTabs(route);
+      });
 
       const setTabs = (route: any) => {
-        console.log(11);
         const {
           fullPath,
           name,

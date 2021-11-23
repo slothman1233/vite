@@ -5,7 +5,6 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  console.log(5555555);
   export default defineComponent({
     setup() {
       return {};

@@ -49,13 +49,15 @@ npm run serve ----- 运行生产代码
 │   │   │   ├── libs 插件的文件夹(默认注入了element和vant)
 │   │   │   └── index.less 全局注入的样式
 │   ├── components 组件文件夹 (文件夹名为组件名---只有文件夹下的index.ts的default为对应的组件方法)
-│   │   ├── SvgIcon    svg组件 
-│   │   ├── HelloWorlds    组件示例 
-│   │   │   └── index.ts   组件实现
-│   │   └── HelloWorld.vue     可以删除
+│   │   │   SvgIcon    svg组件 
+│   │   └── index.ts    组件全局注入 
 │   ├── layout 布局文件夹
 │   │   ├── components 布局的组件文件夹
-│   │   └── index.ts 布局页示例
+│   │   │   ├── Breadcrumb 面包屑组件
+│   │   │   ├── HeaderNav 顶部导航栏和顶部右侧登录信息组件
+│   │   │   ├── SildeBar 左侧列表组件
+│   │   │   └── Tabs 顶部tab切换组件
+│   │   └── index.ts 布局页
 │   ├── router 路由
 │   ├── services api请求文件夹
 │   │   ├── http axios求请求插件
@@ -75,6 +77,7 @@ npm run serve ----- 运行生产代码
 │   │   │   │   └── index.less 全局函数式样式（默认注入）
 │   │   │   └── index.less 全局默认样式（默认注入）
 │   ├── views vue页面
+│   │   └── login  登录页
 │   ├── App.ts
 │   ├── main.ts 
 │   ├── types  ts全局声明
