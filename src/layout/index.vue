@@ -13,7 +13,7 @@
   import { getUserInfoCache } from '@/common/utils/permission';
   import { reactive, toRefs } from 'vue';
   import checkMenuList, { Menu } from '@/common/utils/permission/checkMenuList';
-  import { statroutes } from '@/router';
+  import { statroutes, routes as defaultRoutes } from '@/router';
   import HeaderNav from './component/HeaderNav/index.vue';
 
   export default {
@@ -31,7 +31,10 @@
 
       const menuList: Menu[] = getUserInfo.menuList;
 
-      refData.routes.value = checkMenuList(menuList, statroutes) as never[];
+      refData.routes.value = [
+        ...(defaultRoutes || []),
+        ...checkMenuList(menuList, statroutes),
+      ] as never[];
 
       const toggleSideBar = () => {
         refData.isCollapse.value = !refData.isCollapse.value;
