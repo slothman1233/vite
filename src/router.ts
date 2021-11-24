@@ -33,7 +33,7 @@ const addRouter = async (router: Router) => {
             const ctr = new m()
             const RoutePath = ControllerPath + sprit(ActionPath)
             let methods: Array<any> = middlewares[name] || []
-            console.log(RoutePath)
+            // console.log(RoutePath)
             router[method](RoutePath, koaCompose(methods), ctr[name])
         })
 
@@ -54,7 +54,7 @@ async function fileScan(filepath: string) {
             const module = require(paths).default
             //兼容Linux和window系统
             paths = paths.replace(ctrPath, '').replace(paths.substr(paths.lastIndexOf('\\') >= 0 ? paths.lastIndexOf('\\') : paths.lastIndexOf('/')), '')
-            console.log(paths, ctrPath)
+            // console.log(paths, ctrPath)
             if (module) { modules.push([module, paths]) }
         }
     }
