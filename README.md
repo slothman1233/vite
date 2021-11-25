@@ -139,4 +139,6 @@ npm run docker  -----  在docker下运行
 ```
 docker build -t vite . --build-arg env=test --tag vite:1
 docker run -d -p 8081:80 --name vite  vite:1
+
+然后浏览器打开 http://localhost:8081/ 
 ```
