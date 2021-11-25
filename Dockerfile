@@ -84,7 +84,7 @@ RUN echo 'Asia/Shanghai' >/etc/timezone
 WORKDIR /web
 
 COPY --from=distnodemodules /webapp/node_modules ./node_modules
-# COPY --from=builddist /webapp/node_modules ./node_modules
+# COPY --from=builddist /web/node_modules ./node_modules
 
 COPY --from=builddist /web/dist ./
 

@@ -45,6 +45,7 @@ export async function queryData(key: string, Fun: any) {
 
         //  setTimeout(() => {
         const data = await Fun()
+        
         //eimt 触发事件，将data传递给其他监听这个key的函数
         emitter.emit(key, data)
         //返回给第一个请求
