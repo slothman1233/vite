@@ -39,12 +39,12 @@ export async function queryData(key: string, Fun: any) {
     // 这里是个关键，起到占位的用途，后面的请求会通过emitter.eventNames()去判断前面有没有请求去数据库了。也可以使用其他方式实现这个步骤
     //注册进events
     emitter.once(key, () => {})
-    return new Promise(resolve => {
+    return new Promise(async (resolve) => {
     //这里为去后台数据库请求的操作，这块使用setTimeout模拟异步操作
 
 
         //  setTimeout(() => {
-        const data = Fun()
+        const data = await Fun()
         //eimt 触发事件，将data传递给其他监听这个key的函数
         emitter.emit(key, data)
         //返回给第一个请求

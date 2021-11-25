@@ -29,7 +29,7 @@ export const getIp = function (ctx: Context) {
 //获取本机ip地址
 export const getIPAdress = function () {
     let interfaces = require('os').networkInterfaces()
-    console.log(interfaces)
+    // console.log(interfaces)
     for (let devName in interfaces) {
         let iface = interfaces[devName]
         for (let i = 0; i < iface.length; i++) {

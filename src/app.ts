@@ -18,7 +18,7 @@ import cors from 'koa2-cors'
 import bluebird from 'bluebird'
 import LRU from 'lru-cache'
 import window from './common/utils/window'
-window.Promise = bluebird
+// global.Promise = bluebird
 
 
 
