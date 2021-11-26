@@ -28,7 +28,11 @@ export default (isBuild: boolean, mode: viteMode, viteEnv: ImportMetaEnv) => {
     //客户端环境变量初始化处理
     configClientEnvPlugin(mode),
 
-    vue(),
+    vue({
+      template: {
+        ssr: true,
+      },
+    }),
     vueJsx(),
 
     configSvgIconsPlugin(isBuild), // svg 处理
@@ -40,7 +44,7 @@ export default (isBuild: boolean, mode: viteMode, viteEnv: ImportMetaEnv) => {
     configMockPlugin(VITE_USE_MOCK, isBuild, mode),
 
     //针对 index.html，提供压缩和基于 ejs 模板功能
-    configHtmlPlugin(viteEnv, isBuild),
+    // configHtmlPlugin(viteEnv, isBuild),
 
     configLegacyPlugin(),
 

@@ -13,7 +13,7 @@ const transformIndexHtml = (html: string, ctx?: IndexHtmlTransformContext) => {
 
 export default (mode: viteMode): Plugin | null => {
   //main文件的位置
-  const mainPath = path.resolve(__dirname, '../../../', './src/main.ts');
+  const mainPath = path.resolve(__dirname, '../../../', './client/main.ts');
   switch (mode) {
     case 'dev':
     case 'test':

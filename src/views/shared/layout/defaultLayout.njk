@@ -1,0 +1,39 @@
+{% from '../sharedView/macro/wuc/footer.njk' import footer %}
+{% from '../sharedView/macro/wuc/header.njk' import header %}
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>
+            {% block title %}我是title{% endblock title %}
+        </title>
+
+        {% block style %}{% endblock style %}
+
+    </head>
+
+    <body>
+
+        {% block headers %}
+            {{footer()}}
+        {% endblock headers %}
+
+        {% block body %}
+            <div>
+            body部分
+           </div>
+        {% endblock body %}
+
+        {% block foot %}
+            {{footer()}}
+        {% endblock foot %}
+
+        {% block script %}{% endblock script %}
+
+    </body>
+
+</html>

@@ -1,0 +1,109 @@
+{% extends "./shared/layout/defaultLayout.njk" %}
+
+{# 引入变量 #}
+{% import "./shared/sharedView/set/index.njk" as setCon %}
+{% import "./shared/sharedView/macro/macro.njk" as macroCon %}
+{% from './shared/sharedView/call/test.njk' import add %}
+{% from './shared/sharedView/macro/macro.njk' import field , test as macTest%}
+{% block title %}
+54123123213333
+{% endblock title %}
+
+{% block style %}
+  <link href="/style/a.css" rel="stylesheet">
+{% endblock style %}
+
+{% block script %}
+ 
+
+ 
+{% endblock script %}
+
+{% block body %}
+  <div id="container" style='width:240px'></div>
+
+  {{imgFilePath}}
+
+  {{ setCon.set_test | safe}}
+
+  {# super 获取body默认值的内容 #}
+  {{ super() }}
+
+  <div>
+       index页面
+
+
+   {#
+     -%} 会去除标签右侧的空白字符，{%- 会去除标签之前的空白字符
+   #}
+    {% call add(1, 2) -%}
+      The result is
+    {%- endcall %}
+
+    <div id="tt"></div>
+  {% if title !== undefined%}
+    <div>{{title | replace("2","ddd") | shorten}}</div>
+  {% endif %}
+    <div> respost:{{respost}}</div>
+    <div> 文本内容 </div>
+    {% set name='5g'%}
+    {{name}}
+    {% set name='g'%}
+    {{name}}
+    <div> html内容 </div>
+    {{html}}
+
+    {#
+      escape html转义
+      safe  不转义
+     #}
+
+    {{html | escape}}
+
+    {% include "test.njk" %}
+{# 
+    {% if title === "12222313123123" %}
+      title
+    {% elif name %}
+      name
+    {%else %}
+      end
+    {% endif %} #}
+
+    {% for item in data %}
+      <div>loop.index: {{loop.index}}: 当前循环数 (1 indexed) </div>
+      <div>loop.index0:{{loop.index0}}: 当前循环数 (0 indexed) </div>
+      <div>loop.revindex:{{loop.revindex}}: 当前循环数，从后往前 (1 indexed) </div>
+      <div>loop.revindex0:{{loop.revindex0}}: 当前循环数，从后往前 (0 based) </div>
+      <div>loop.first:{{loop.first}}: 是否第一个 </div>
+      <div>loop.last:{{loop.last}}: 是否最后一个 </div>
+      <div>loop.length:{{loop.length}}: 总数 </div>
+
+      <div> a:  {{item.a }}
+      </div>
+      <div> b:  {{item.b}}
+      </div>
+      <div> c:  {{item.c}}
+      </div>
+    {% endfor %}
+
+    {% for item in sequence %}
+    {% else %}
+      <div>sequence为空</div>
+    {% endfor %}
+
+    {{macTest()}}
+
+    {{ field('user') }}
+
+    {{ field('user',value='gfgf') }}
+
+    {{ field('pass',type='password') }}
+
+    {{ macroCon.field('email',value='sfsdfdsfsdf') }}
+
+
+{@{FmMoreRead("views/shared/sharedView/macro/wuc.footer.njk",{type:"cn",newsId:"1",categoryId:"1",langeType:"2"})}@}
+  </div>
+
+{% endblock body %}

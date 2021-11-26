@@ -4,6 +4,12 @@ import type { Plugin } from 'vite';
 
 export default (): Plugin | null => {
   return eslintPlugin({
-    include: ['src/**/*.vue', 'src/**/*.tsx', 'src/**/*.jsx', 'src/**/*.js', 'src/**/*.ts'], // 检查的文件
+    include: [
+      'client/**/*.vue',
+      'client/**/*.tsx',
+      'client/**/*.jsx',
+      'client/**/*.js',
+      'client/**/*.ts',
+    ], // 检查的文件
   });
 };

@@ -5,16 +5,17 @@ import proxy from './config/viteConfig/proxy';
 import plugins from './config/viteConfig/plugins/plugins';
 // https://vitejs.dev/config/
 
-import { wrapperEnv } from './src/common/utils/env';
+import { wrapperEnv } from './client/common/utils/env';
 
 import autoprefixer from 'autoprefixer';
 
 //env根路径
 const envDir = path.resolve(process.cwd(), 'config/env');
 
+// https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const isBuild = command === 'build';
-
+  console.log(mode);
   const env = loadEnv(mode, envDir);
 
   const viteEnv = wrapperEnv(env);
@@ -44,13 +45,13 @@ export default defineConfig(({ command, mode }) => {
       },
       preprocessorOptions: {
         // scss: {
-        //   additionalData: '@import "./src/assets/style/index.scss";'
+        //   additionalData: '@import "./client/assets/style/index.scss";'
         // }
 
         //注入全局less变量
         less: {
           javascriptEnabled: true,
-          additionalData: `@import (reference) "./src/styles/public/common/index.less";`,
+          additionalData: `@import (reference) "./client/styles/public/common/index.less";`,
         },
       },
     },
@@ -63,13 +64,13 @@ export default defineConfig(({ command, mode }) => {
     resolve: {
       // 目录别名
       alias: {
-        '@': path.resolve('src'),
-        comps: path.resolve('src/components'),
-        services: path.resolve('src/services'),
-        views: path.resolve('src/views'),
-        store: path.resolve('src/store'),
-        router: path.resolve('src/router'),
-        styles: path.resolve('src/styles'),
+        '@': path.resolve('client'),
+        comps: path.resolve('client/components'),
+        services: path.resolve('client/services'),
+        views: path.resolve('client/views'),
+        store: path.resolve('client/store'),
+        router: path.resolve('client/router'),
+        styles: path.resolve('client/styles'),
         mock: path.resolve('mock'),
       },
     },
@@ -102,7 +103,7 @@ export default defineConfig(({ command, mode }) => {
       target: 'es2015',
 
       // 压缩
-      minify: isProduction ? 'esbuild' : false,
+      // minify: isProduction ? 'esbuild' : false,
 
       //静态文件的输出目录
       assetsDir: VITE_PUBLICDIR_OUT,
@@ -120,11 +121,14 @@ export default defineConfig(({ command, mode }) => {
 
       rollupOptions: {
         //js 和 css 分包
-        output: {
-          chunkFileNames: 'static/js/[name]-[hash].js',
-          entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-        },
+        output: ((mode) => {
+          if (mode === 'build:server') return {};
+          return {
+            chunkFileNames: 'static/js/[name]-[hash].js',
+            entryFileNames: 'static/js/[name]-[hash].js',
+            assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+          };
+        })(mode),
 
         // 多入口文件打包
         // input: {

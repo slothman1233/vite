@@ -1,0 +1,22 @@
+
+{#
+  field
+#}
+{% macro field(name, value = '', type = 'text') %}
+  <div class="field">
+    <input type="{{ type }}" name="{{ name }}"
+         value="{{ value | escape }}"/>
+  </div>
+{% endmacro %}
+
+
+{#
+  test
+#}
+{% macro test() %}
+  <div>234523452345234523452345</div>
+{% endmacro %}
+
+{# call区块允许你使用标签之间的内容来调用一个宏。这在你需要给宏传入大量内容时是十分有用的。在宏中，你可以通过caller()来获取这些内容。 #}
+
+

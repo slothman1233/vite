@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2018",
     "useDefineForClassFields": true,
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "strict": true,
+    "strict": false,
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -12,6 +12,16 @@
     // "isolatedModules": true,
     "skipLibCheck": true /* 跳过声明文件的类型检查. */,
     "forceConsistentCasingInFileNames": true, /* 不允许对同一文件的大小写不一致的引用 */
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedParameters": false,
+    "noUnusedLocals": false,
+    "noImplicitReturns": true,
+    "experimentalDecorators": true, // 开启装饰器的使用
+    "emitDecoratorMetadata": true,
+    "allowJs": true,
     "lib": [
       "esnext",
       "dom"
@@ -23,41 +33,59 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "src/*"
+        "client/*"
       ],
       "comps/*": [
-        "src/components/*"
+        "client/components/*"
       ],
       "services/*": [
-        "src/services/*"
+        "client/services/*"
       ],
       "views/*": [
-        "src/views/*"
+        "client/views/*"
       ],
       "store/*": [
-        "src/store/*"
+        "client/store/*"
       ],
       "mock/*": [
         "mock/*"
       ],
     }
   },
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-decorators-legacy"
+  ],
   "typeRoots": [
     "./node_modules/@types/",
     "./types"
-    
-    
   ], // 声明文件目录，默认时node_modules/@types
   //指定一个匹配列表（属于自动指定该路径下的所有ts相关文件）
   "include": [
     "vite.config.ts",
     "config/**/*.ts",
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
+    "client/**/*.ts",
+    "client/**/*.d.ts",
+    "client/**/*.tsx",
+    "client/**/*.vue",
     "mock/**/*.ts",
     "types/**/*.d.ts",
     "types/**/*.ts",
+    "server.js",
+    "src/**/*.ts",
+    "src/**/*.d.ts"
+, "www.ts"  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }
