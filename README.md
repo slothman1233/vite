@@ -110,6 +110,14 @@ npm run docker:prod ----- docker下 运行打包后的生成代码
 └── vite.config.ts vite 服务配置
 
 ```
+# docker命令
+```
+docker build -t koa . --build-arg env=test --tag koa:1
+docker run -d -p 8081:80 --name vite  koa:1
+
+然后浏览器打开 http://localhost:8081/ 
+
+```
 
 备注
 ```

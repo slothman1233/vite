@@ -36,6 +36,41 @@
 ├── entry-client.ts
 ├── entry-server.ts
 └── main.ts 
+```
+## 一、SEO渲染 ##
+
+SEO渲染主要需要解决两个问题：
+
+#### 1、异步数据加载问题 ###
+
+Vue 3 中 setup 方法，返回如果不是 Object 对象而是一个 Promise，那么服务端渲染时会 await 等待数据获取结束，再进行页面渲染。因此封装了一个setupData方法，用法如下：
+
+```javascript
+import {defineComponent} from 'vue'
+import setupData from '../plugin/setupData'
+
+export default defineComponent({
+    name: "index",
+    setup() {
+        // 函数封装很简单，参数格式自行查看源码
+        return setupData({
+          info: {
+            requestFun: () => {
+              return new Promise((resolve, reject) => {
+                resolve('');
+              });
+            },
+            callBackFun: (data, res) => {
+              console.log(res);
+              res.result = 'HI~Async';
+            },
+          },
+        }, {
+            title: 'setupData'
+        });
+    }
+})
+```
 
 #### 2、title 和 meta ###
 

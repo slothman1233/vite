@@ -46,6 +46,8 @@ async function fileScan(filepath: string) {
       await fileScan(paths);
     } else if (/^[^.]+\.(t|j)s$/.test(name)) {
       const ctrPath = path.join(__dirname, 'routes');
+
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const module = require(paths).default;
       paths = paths.replace(ctrPath, '').replace(paths.substr(paths.lastIndexOf('\\')), '');
       if (module) {

@@ -15,7 +15,7 @@ const envDir = path.resolve(process.cwd(), 'config/env');
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const isBuild = command === 'build';
-  console.log(mode);
+
   const env = loadEnv(mode, envDir);
 
   const viteEnv = wrapperEnv(env);

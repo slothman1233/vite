@@ -1,19 +1,21 @@
 #RUN npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/
 #下载项目文件的node_modules
-FROM node:11 as build
+FROM node:16 as build
 
 # 切换为阿里源
-RUN npm config set registry http://47.113.105.208:8088/
+RUN npm config set registry https://registry.npmmirror.com/
 
 WORKDIR /webapp
 
 COPY package.json ./
 
+COPY package-lock.json ./
+
 RUN npm install
 
 
 #获取生产文件
-FROM node:11 as builddist
+FROM node:16 as builddist
 ARG env
 
 WORKDIR /web
@@ -28,20 +30,25 @@ RUN npm run build:${env}
 
 
 #下载生产的node_modules
-FROM node:11 as distnodemodules
+FROM node:16 as distnodemodules
 
 # 切换为阿里源
-RUN npm config set registry http://47.113.105.208:8088/
+RUN npm config set registry https://registry.npmmirror.com/
 
 WORKDIR /webapp
 
 COPY package.json ./
 
-RUN npm install tslib  && npm install --production
+COPY package-lock.json ./
+
+RUN  npm install --production
 
 
 #产出生产镜像
-FROM node:11-alpine
+FROM node:16-alpine
+ARG env
+ENV ev $env
+
 
 #设置时区
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -51,11 +58,17 @@ WORKDIR /web
 
 COPY --from=distnodemodules /webapp/node_modules ./node_modules
 
-COPY --from=builddist /web/dist ./
+COPY --from=builddist /web/dist ./dist
 
+COPY --from=builddist /web/vitedist ./vitedist
+
+COPY --from=builddist /web/package.json package.json
+
+COPY --from=builddist /web/pm2.conf.json pm2.conf.json
+#特殊情况下 找不到 cross-env  重新全局安装
+RUN  npm install cross-env -g
 
 # 暴露端口映射
-# EXPOSE 2000
-ENTRYPOINT ["npm", "run","docker"]
+ENTRYPOINT command npm run docker:${ev}
 
 
