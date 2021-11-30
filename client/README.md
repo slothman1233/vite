@@ -78,7 +78,7 @@ export default defineComponent({
 
 ```javascript
 import {defineComponent} from 'vue'
-import {myMeta, usMeta} from '/src/plugin/meta'
+import {myMeta, usMeta} from '@/common/utils/libs/meta'
 
 export default defineComponent({
     mixins: [myMeta],
