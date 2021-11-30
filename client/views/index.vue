@@ -1,8 +1,8 @@
 <template>
-  <div>
-   123213213
-  </div>
+  <div> {{ title }} </div>
+  <div>{{ info }}</div>
 
+  <HelloWorld></HelloWorld>
   <div>
     <SvgIcon icon-class="a-bug"></SvgIcon>
     <SvgIcon icon-class="projectManage"></SvgIcon>
@@ -10,6 +10,8 @@
 </template>
 
 <script lang="ts">
+  import setupData from '@/common/utils/libs/setupData';
+  import { getrandom } from '@/services/randomDataService/randomData';
   import HelloWorld from 'comps/HelloWorld.vue';
   import { defineComponent } from 'vue';
 
@@ -17,9 +19,27 @@
     name: 'ViewsHome',
     components: { HelloWorld },
     setup(prop) {
-      return {
-        msg: 'hello World',
-      };
+      return setupData(
+        {
+          info: {
+            requestFun: getrandom,
+            callBackFun: (data, res) => {
+              return '11';
+            },
+          },
+          infos: {
+            requestFun: getrandom,
+            callBackFun: (data, res) => {
+              console.log(res);
+              res.info = '66';
+              return '22';
+            },
+          },
+        },
+        {
+          title: 'setupData',
+        },
+      );
     },
   });
 </script>

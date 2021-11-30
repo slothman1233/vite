@@ -12,7 +12,7 @@ export const getrandom = () =>
   service
     .get<any>(RANDOMDATA)
     .then((response) => {
-      return response?.bodyMessage;
+      return response;
     })
     .catch((e: any) => {
       console.log(e);

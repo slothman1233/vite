@@ -3,6 +3,7 @@
  */
 import type { Plugin } from 'vite';
 import { viteMockServe } from 'vite-plugin-mock';
+import path from 'path';
 
 export default function configMockPlugin(
   useMock = true,
@@ -12,11 +13,13 @@ export default function configMockPlugin(
   let viteMockServePlugin: Plugin | null = null;
 
   if (mode === 'mock' && useMock) {
+    // console.log(path.resolve(process.cwd(), 'client/main.{ts,js}'));
     viteMockServePlugin = viteMockServe({
       ignore: /^_/, //自动读取模拟.ts 文件时，请忽略指定格式的文件
       mockPath: 'mock', //mock文件地址
       localEnabled: !isBuild, // 开发打包开关
       prodEnabled: isBuild, // 生产打包开关
+      injectFile: path.resolve(process.cwd(), 'client/main.{ts,js}'),
       // 这样可以控制关闭mock的时候不让mock打包到最终代码内
       injectCode: `
       import { setupProdMockServer } from 'mock/_createProductionServer';

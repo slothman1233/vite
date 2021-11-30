@@ -1,27 +1,72 @@
-# 基于 vite+vue3+mock的web端框架
+# 基于 koa+vite+vue3+mock的ssr web端框架
 
+运行要求
+```bash
+node版本 v16.13.0
+npm版本 8.0.0以上
+```
+
+附加说明
+```bash
+  默认去掉了掉redis 跟mysql的连接 需要的话 
+
+1.在app.ts
+ sequelizeInit()
+
+  store: redisStore({
+       port: redisConf.port,
+       host: redisConf.host
+   })
+
+   恢复这两段
+2. 在common/config/env 文件修改mysql个redis对应的配置即可
+```
 
 
 命令介绍
 ```bash
+http://localhost:2000/
 npm run dev     -----  运行dev环境
 npm run test  -----  运行test 环境
 npm run pre -----  运行pre 环境
-npm run ga  -----  运行ga 环境
+npm run prod  -----  运行ga 环境
 npm run mock  -----  运行mock数据的环境
-npm run build ----- 打包生产代码
-npm run build:mock ----- 打包生产代码带mock的
-npm run serve ----- 运行生产代码
+
+本地不打包运行seo代码 没有样式文件和js文件 只关注 是不是服务端渲染
+http://localhost:2000/
+npm run dev:seo     ----- ssr 运行dev环境
+npm run test:seo  ----- ssr 运行test 环境
+npm run pre:seo ----- ssr 运行pre 环境
+npm run prod:seo  -----  ssr 运行ga 环境
+npm run mock:seo  -----  ssr 运行mock数据的环境
+
+npm run build ----- 打包生产环境代码
+npm run build:dev ----- 打包开发环境代码
+npm run build:test ----- 打包测试代码
+npm run build:pre ----- 打包已发布代码
+npm run build:prod ----- 打包生产代码
+
+
+需要先打包然后运行 http://localhost:8087/
+npm run start ----- 运行打包后的生产代码
+npm run start:dev ----- 运行打包后的开发代码
+npm run start:test ----- 运行打包后的测试代码
+npm run start:pre ----- 运行打包后的预发布代码
+npm run start:prod ----- 运行打包后的生成代码
+
+
+npm run docker ----- docker下 运行打包后的生产代码
+npm run docker:dev ----- docker下 运行打包后的开发代码
+npm run docker:test ----- docker下 运行打包后的测试代码
+npm run docker:pre ----- docker下 运行打包后的预发布代码
+npm run docker:prod ----- docker下 运行打包后的生成代码
+
 ```
 
-开发方式
-```bash
-1.在views里面创建vue的页面 
-2.在routes里面创建对应的路由
-```
 
 目录说明
 ```
+├── client vue代码 详细介绍看文件夹里面的md文件
 ├── config  vite的配置文件
 │   ├── env  vite运行下的配置文件夹
 │   └── viteConfig vite配置
@@ -36,51 +81,28 @@ npm run serve ----- 运行生产代码
 │   │   │   ├── configSvgIconsPlugin   svg 处理
 │   │   │   └── plugins.less vite.config.ts  中的 plugins 配置入口
 │   │   └── proxy.ts   代理配置
-├── dist  生产代码文件夹
-├── mock  mock文件(带有"_"开头的文件不会注入   请求地址必须是哦那个src/services/RequestPathName.ts里面的地址)
+├── dist  koa生产代码文件夹
+├── mock  mock文件(带有"_"开头的文件不会注入   请求地址必须是client/services/RequestPathName.ts里面的地址)
 │   ├── demo  mock示例
 │   ├── _createProductionServer.ts  mock注入初始化
 │   └── _util.ts 基础模型
-├── public  静态文件夹
-├── src
-│   ├── common 公共部分
-│   │   ├── config 针对客户端的环境配置文件夹
-│   │   ├── utils 通用文件夹
-│   │   │   ├── libs 插件的文件夹(默认注入了element和vant)
-│   │   │   └── index.less 全局注入的样式
-│   ├── components 组件文件夹 (文件夹名为组件名---只有文件夹下的index.ts的default为对应的组件方法)
-│   │   ├── SvgIcon    svg组件 
-│   │   ├── HelloWorlds    组件示例 
-│   │   │   └── index.ts   组件实现
-│   │   └── HelloWorld.vue     可以删除
-│   ├── layout 布局文件夹
-│   │   ├── components 布局的组件文件夹
-│   │   └── index.ts 布局页示例
-│   ├── router 路由
-│   ├── services api请求文件夹
-│   │   ├── http axios求请求插件
-│   │   ├── randomDataService 请求示例
-│   │   ├── https 请求单例初始化
-│   │   └── RequestPathName.ts 请求地址(mock和请求使用)
-│   ├── store 状态管理文件夹
-│   │   ├── interface 模型声明
-│   │   ├── modules 状态管理实现文件夹(每新建个文件需要在interface/index 进行声明)
-│   │   ├── index 状态管理初始化和注入文件夹
-│   │   └── mutation-types 状态管理静态变量文件
-│   ├── styles 样式文件夹
-│   │   ├── plugin 插件的样式文件夹
-│   │   │   └── index.less 全局注入的样式(默认注入了element和vant)
-│   │   ├── public 全局样式
-│   │   │   ├── common 样式变量
-│   │   │   │   └── index.less 全局函数式样式（默认注入）
-│   │   │   └── index.less 全局默认样式（默认注入）
-│   ├── views vue页面
-│   ├── App.ts
-│   ├── main.ts 
-│   ├── types  ts全局声明
-│   │   ├── env.d.ts  env 全局配置声明文件
-│   │   ├── index.d.ts  全局声明
-│   │   └── window.d.ts  window的ts声明
+├── public  静态资源文件夹
+├── src koa 代码文件夹 详细介绍看文件夹里面的md文件
+├── types  ts全局声明
+│   ├── clientEnv.d.ts  vue 环境配置文件说明
+│   ├── env.d.ts  env 全局配置声明文件
+│   ├── index.d.ts  全局声明
+│   ├── shims-vue.d.ts  vue声明
+│   └── window.d.ts  window的ts声明
+├── vitedist  vite生产代码文件夹
+├── run  vite复制的生产代码文件夹
+├── docker-compose.yml  docker-compose 文件  
+├── Dockerfile  docker的配置文件
+├── jest.config.js  jest 配置文件
+├── jest.setup.js   jest 的脚本文件
+├── nodemon.json  nodemon的配置文件
+├── pm2.conf.json pm2的配置文件
+├── tsconfig.json ts的配置文件
 ├── .eslintignore  eslint 排除文件
 ├── .eslintrc.js    eslint  配置
 ├── prettier.config.js  prettier配置
@@ -93,6 +115,13 @@ npm run serve ----- 运行生产代码
 ```
 eslint 
 
+vscode 首选项 -> 设置里面添加 
+"editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "eslint.autoFixOnSave" : true,
+}
+
+--------------- 不用安装 -------------------
 #安装eslint
 npm install --save-dev eslint eslint-plugin-vue
 
@@ -101,11 +130,5 @@ npm install --save-dev prettier eslint-plugin-prettier @vue/eslint-config-pretti
 
 #安装typescript支持
 npm install --save-dev @vue/eslint-config-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser
-
-vscode 首选项 -> 设置里面添加 
-"editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "eslint.autoFixOnSave" : true,
-}
 
 ```

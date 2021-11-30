@@ -32,7 +32,7 @@ import httpproxymiddleware from './middleware/proxy/httpproxymiddleware';
 
 import zlib from 'zlib';
 import microCache from './common/utils/microcache';
-import createServer from './servervire';
+import createServer from './servervite';
 
 // import httpservercache from './middleware/httpservercache'
 // const micro = new microCache()
@@ -143,24 +143,6 @@ app.use(json());
 //     app.use(logger())
 // }
 
-//引用静态资源
-// maxage -- 浏览器缓存的最大寿命（以毫秒为单位）。默认为0
-// hidden -- 允许传输隐藏文件。默认为false
-// index -- 默认文件名，默认为“ index.html”
-// defer -- 如果为true，则在服务之后return next()，允许任何下游中间件首先响应。 默认 false
-// gzip -- 当客户端支持gzip且所请求的扩展名为.gz的文件存在时，请尝试自动提供文件的gzip压缩版本。默认为true。
-// br -- 当客户端支持brotli并且存在所请求的扩展名为.br的文件时（请注意，仅通过https接受brotli），请尝试自动提供文件的brotli版本。默认为true。
-// setHeaders -- 函数，用于在响应时设置自定义标头。
-// extensions -- URL 中没有扩展名时，尝试匹配传递的数组中的扩展名以搜索文件。首先找到的是送达。（默认为false）
-
-app.use(
-  koaStatic(__dirname + '/../run/client/', {
-    maxage: isDev ? 0 : 1000 * 10,
-    index: false,
-    gzip: true,
-  }),
-);
-
 //在路由之前调用 因为我们的中间件是在路由中使用的 故应该在路由前加到请求上下文ctx中
 app.use(
   nunjucksMiddleware({
@@ -199,10 +181,28 @@ app.use(
 );
 
 async function start() {
-  await createServer(app);
-
+  //------------------------------顺序不能改-----------------------变
   //路由初始化
   await addRouter(router);
+
+  //引用静态资源
+  // maxage -- 浏览器缓存的最大寿命（以毫秒为单位）。默认为0
+  // hidden -- 允许传输隐藏文件。默认为false
+  // index -- 默认文件名，默认为“ index.html”
+  // defer -- 如果为true，则在服务之后return next()，允许任何下游中间件首先响应。 默认 false
+  // gzip -- 当客户端支持gzip且所请求的扩展名为.gz的文件存在时，请尝试自动提供文件的gzip压缩版本。默认为true。
+  // br -- 当客户端支持brotli并且存在所请求的扩展名为.br的文件时（请注意，仅通过https接受brotli），请尝试自动提供文件的brotli版本。默认为true。
+  // setHeaders -- 函数，用于在响应时设置自定义标头。
+  // extensions -- URL 中没有扩展名时，尝试匹配传递的数组中的扩展名以搜索文件。首先找到的是送达。（默认为false）
+  app.use(
+    koaStatic(__dirname + '/../run/client/', {
+      maxage: isDev ? 0 : 1000 * 10,
+      index: false,
+      gzip: true,
+    }),
+  );
+
+  await createServer(app);
 
   app.use(router.routes()).use(router.allowedMethods());
 

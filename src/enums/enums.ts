@@ -14,9 +14,8 @@ export enum FmNewsCategoryType {
   金融案鉴 = 9,
   行业资讯 = 100,
   交易干货 = 101,
-  活动采访 = 102
+  活动采访 = 102,
 }
-
 
 export enum CacheTime {
   None = 0,
@@ -43,5 +42,5 @@ export enum CacheTime {
   Second10 = 10,
   Second5 = 5,
   Second3 = 3,
-  Second1 = 1
+  Second1 = 1,
 }

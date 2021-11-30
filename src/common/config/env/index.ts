@@ -3,36 +3,25 @@
  * @author 文亮
  */
 
+import dev from './dev';
+import test from './test';
+import pre from './pre';
+import prod from './prod';
 
-import dev from './dev'
-import test from './test'
-import pre from './pre'
-import ga from './ga'
+import { isTest, isPre, isGa, isDocker } from '../../utils/env';
 
-import { isTest, isPre, isGa, isDocker } from '../../utils/env'
+import { env } from './env';
 
-import { env } from './env'
-
-
-
-
-
-let config: env = dev
+let config: env = dev;
 
 if (isTest) {
-    config = test
+  config = test;
 } else if (isPre) {
-    config = pre
+  config = pre;
 } else if (isGa || isDocker) {
-    config = ga
+  config = prod;
 }
 
+config.dataCahce = {};
 
-config.dataCahce = {
-    
-}
-
-
-export default config
-
-
+export default config;

@@ -20,7 +20,7 @@ export default defineConfig(({ command, mode }) => {
 
   const viteEnv = wrapperEnv(env);
 
-  const isProduction = isBuild && (mode === 'mock' || mode === 'ga');
+  const isProduction = isBuild && (mode === 'mock' || mode === 'pord');
 
   const {
     VITE_OUTDIR,

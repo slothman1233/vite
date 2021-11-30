@@ -1,10 +1,7 @@
-
-
 // import crypto from 'crypto'
 
 // //加密算法
 // import { CRYPTO_SECRET_KEY } from '../config/constant'
-
 
 // /**
 //  * md5 加密
@@ -24,6 +21,5 @@
 //     const str = `${content}_${CRYPTO_SECRET_KEY}`
 //     return md5(str)
 // }
-
 
 // export default doCrypto

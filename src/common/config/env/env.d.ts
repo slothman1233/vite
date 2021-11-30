@@ -7,63 +7,59 @@
  * mysql 配置
  */
 type mysql = {
-    /**
-    * 账号
-    */
-    user: string,
-    /**
-    * 密码
-    */
-    password: string,
-    /**
-    * 地址
-    */
-    host: string,
-    /**
-    * 端口
-    */
-    port: number,
-    /**
-    * 表名称
-    */
-    database: string,
-}
+  /**
+   * 账号
+   */
+  user: string;
+  /**
+   * 密码
+   */
+  password: string;
+  /**
+   * 地址
+   */
+  host: string;
+  /**
+   * 端口
+   */
+  port: number;
+  /**
+   * 表名称
+   */
+  database: string;
+};
 
 /**
  * redis 配置
  */
 type redis = {
-    /**
-     * 地址
-     */
-    host: string,
-    /**
-     * 端口
-     */
-    port: number,
-    keys: string[]
-}
+  /**
+   * 地址
+   */
+  host: string;
+  /**
+   * 端口
+   */
+  port: number;
+  keys: string[];
+};
 
 type env = {
-    /**
-     * mysql 配置
-     */
-    mysql: mysql,
-    /**
-     * redis 配置
-     */
-    redis: redis,
+  /**
+   * mysql 配置
+   */
+  mysql: mysql;
+  /**
+   * redis 配置
+   */
+  redis: redis;
 
-    imgFilePath: string
+  imgFilePath: string;
 
-    /**
-     * 全局数据缓存 供给nunjucks使用
-     */
-    dataCahce?: object
-}
+  /**
+   * 全局数据缓存 供给nunjucks使用
+   */
+  dataCahce?: object;
+};
 
-export {
-    mysql,
-    redis,
-    env
-}
+export { mysql, redis, env };

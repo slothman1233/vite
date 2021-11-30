@@ -1,6 +1,1 @@
-
-
-
-async function tests() {
-
-}
+async function tests() {}

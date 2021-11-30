@@ -18,7 +18,7 @@ export default (mode: viteMode): Plugin | null => {
     case 'dev':
     case 'test':
     case 'pre':
-    case 'ga':
+    case 'prod':
     case 'mock':
       envName = mode;
       break;

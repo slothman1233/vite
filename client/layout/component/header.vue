@@ -3,7 +3,7 @@
     class="layout-header"
     height="50"
     :style="{
-      position: 'fixed',
+      position: 'relative',
       width: '100%',
       'z-index': '2',
       padding: '0',

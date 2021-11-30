@@ -61,5 +61,3 @@
     color: #304455;
   }
 </style>
-
-function getrandom() { throw new Error("Function not implemented."); }

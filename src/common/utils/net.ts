@@ -2,7 +2,7 @@
 // import qs from 'querystring'
 // import { SuccessModel, ErrorModel } from '../../model/resModel'
 
-import HttpService from '@stl/request';
+import HttpService from './http';
 import log from '../../middleware/log4js/log';
 // import HttpService from './src'
 

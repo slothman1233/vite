@@ -12,7 +12,7 @@
             "coverage"
         ],
         "env": {
-            "NODE_ENV": "ga"
+            "NODE_ENV": "prod"
         },
         "instances": 1,
         "interpreter": "../node_modules/.bin/ts-node",
