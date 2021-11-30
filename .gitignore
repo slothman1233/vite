@@ -7,3 +7,4 @@ run
 *.local
 .idea
 pkg
+logs
