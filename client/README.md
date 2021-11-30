@@ -124,6 +124,4 @@ export default defineComponent({
     }
 })
 
-// 也可以设置 mixin = true 把 myMeta 添加到全局 mixin
-app.use(myMeta, {mixin: true})
 ```
