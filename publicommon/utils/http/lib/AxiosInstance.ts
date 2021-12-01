@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
-import { ErrorModel } from './_util';
+import { ErrorModel } from '../../../model/resModel';
 // 控制跳转中心
 import { parse } from 'qs';
 import { ResponseData, ReqBaseConfig, Codes } from '..';

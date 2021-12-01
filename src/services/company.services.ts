@@ -1,7 +1,7 @@
 import config from '../common/config/env';
 import http from '../common/utils/net';
 
-const apiFMCompany = 'FMCompanyApi';
+// const apiFMCompany = 'FMCompanyApi';
 
 import CacheInterceptor from '../common/decorator/CacheInterceptor';
 import { CacheTime } from '../enums/enums';

@@ -1,6 +1,6 @@
 import { RANDOMDATA } from '@/services/RequestPathName';
 import { MockMethod } from 'vite-plugin-mock';
-import { SuccessModel } from '../_util';
+import { SuccessModel } from '../../publicommon/model/resModel';
 
 const model = {
   name: 'aaa',

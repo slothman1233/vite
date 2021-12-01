@@ -1,4 +1,4 @@
-import HttpService from './http';
+import HttpService from '../../publicommon/utils/http';
 const service = new HttpService('', {
   // msgUI: Message,
   // logout: () => power.logout(),

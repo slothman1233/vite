@@ -84,9 +84,11 @@ npm run docker:prod ----- docker下 运行打包后的生成代码
 ├── dist  koa生产代码文件夹
 ├── mock  mock文件(带有"_"开头的文件不会注入   请求地址必须是client/services/RequestPathName.ts里面的地址)
 │   ├── demo  mock示例
-│   ├── _createProductionServer.ts  mock注入初始化
-│   └── _util.ts 基础模型
+│   └── _createProductionServer.ts  mock注入初始化
 ├── public  静态资源文件夹
+├── publicommon web client 通用文件夹
+│   ├── model  模型文件夹
+│   └── utils  通用插件文件夹
 ├── src koa 代码文件夹 详细介绍看文件夹里面的md文件
 ├── types  ts全局声明
 │   ├── clientEnv.d.ts  vue 环境配置文件说明

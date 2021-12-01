@@ -1,5 +1,5 @@
 import { CacheTime } from '../../enums/enums';
-import { bodyModel, ReturnModel } from '../../model/resModel';
+import { bodyModel, ReturnModel } from '../../../publicommon/model/resModel';
 import microCache from '../utils/microcache';
 import { awaitData, hasEvent, queryData } from '../utils/CacheBreakdown';
 
@@ -11,14 +11,16 @@ function getkey(key: string, arg: any[]) {
   let data = arg[0];
   try {
     data = JSON.stringify(arg[0]);
-  } catch (e) {}
+  } catch (e) {
+    console.error(e);
+  }
   const cacheName = `${key}_${data}`;
 
   return cacheName;
 }
 
 //定时任务
-function timeTask(key: string, CacheSeconds: number, arg: any[], method: Function, proto: Object) {
+function timeTask(key: string, CacheSeconds: number, arg: any[], method: Function, proto: any) {
   const cacheName = getkey(key, arg);
   //如果存在则跳过
   if (Object.keys(timeTaskAry).indexOf(cacheName) >= 0) {
@@ -28,11 +30,11 @@ function timeTask(key: string, CacheSeconds: number, arg: any[], method: Functio
   process.nextTick(() => settime(key, CacheSeconds, arg, method, proto));
 }
 
-function settime(key: string, CacheSeconds: number, arg: any[], method: Function, proto: Object) {
+function settime(key: string, CacheSeconds: number, arg: any[], method: Function, proto: any) {
   const cacheName = getkey(key, arg);
   timeTaskAry[cacheName] = setTimeout(async () => {
     const val: bodyModel<any> = await method.apply(proto.constructor, arg);
-    if (val.subcode !== '') {
+    if (val.subCode !== '') {
       cache.set(cacheName, val);
     }
     process.nextTick(() => settime(key, CacheSeconds, arg, method, proto));
@@ -46,7 +48,7 @@ function settime(key: string, CacheSeconds: number, arg: any[], method: Function
  * @return {void}
  */
 export default function CacheInterceptor(key: string, CacheSeconds: CacheTime) {
-  return (proto: Object, name: string | symbol, descriptor: TypedPropertyDescriptor<Function>) => {
+  return (proto: any, name: string | symbol, descriptor: TypedPropertyDescriptor<Function>) => {
     const method = descriptor.value;
     descriptor.value = async function (...arg: any[]) {
       //定时任务的执行
@@ -73,7 +75,7 @@ export default function CacheInterceptor(key: string, CacheSeconds: CacheTime) {
 
         // val = await method.apply(proto.constructor, arg)
 
-        if (val.subcode !== '') {
+        if (val.subCode !== '') {
           cache.set(cacheName, val);
         } else {
           cache.set(cacheName, null);

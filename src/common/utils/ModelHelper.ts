@@ -1,4 +1,4 @@
-import { bodyModel } from '../../model/resModel';
+import { bodyModel } from '../../../publicommon/model/resModel';
 
 /// <summary>
 /// 反序列化

@@ -5,6 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": false,
+    "rootDir":".",
     "jsx": "preserve",
     "sourceMap": true,
     "resolveJsonModule": true,
@@ -83,7 +84,7 @@
     "server.js",
     "src/**/*.ts",
     "src/**/*.d.ts"
-, "www.ts"  ],
+, "www.ts", "publicommon/**/*.ts"  ],
   "exclude": [
     "node_modules",
     "dist"

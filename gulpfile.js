@@ -7,13 +7,14 @@ const tsProject = ts.createProject('tsconfig.json');
 const ENV = process.env.NODE_ENV || 'prod';
 
 function clean(cb) {
-  return del(['dist', 'vitedist', 'run'], cb);
+  return del(['dist'], cb);
 }
 
 // 输出 js 到 dist目录
 function toJs() {
   return src(['src/**/*.ts', 'src/**/*.js', '!src/wwwroot/**/*'])
     .pipe(tsProject())
+    .pipe(replace('../publicommon', `publicommon`))
     .pipe(dest('dist'));
 }
 
@@ -29,6 +30,10 @@ function topm2config() {
     .pipe(replace('NODE_ENV=prod', `NODE_ENV=${ENV}`))
     .pipe(replace(`"interpreter": "./node_modules/.bin/ts-node",`, ``))
     .pipe(dest('dist'));
+}
+
+function topublicommon() {
+  return src(['publicommon/**/*.ts']).pipe(tsProject()).pipe(dest('dist/publicommon'));
 }
 
 function tostaticwwwroot() {
@@ -62,7 +67,15 @@ function runNodemon(done) {
     });
 }
 
-const build = series(clean, toJs, tostaticfile, tostaticviews, topm2config, tostaticwwwroot);
+const build = series(
+  clean,
+  toJs,
+  topublicommon,
+  tostaticfile,
+  tostaticviews,
+  topm2config,
+  tostaticwwwroot,
+);
 task('build', build);
 task('default', runNodemon);
 exports.build = build;
