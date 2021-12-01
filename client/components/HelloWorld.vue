@@ -50,9 +50,6 @@
 
       const store = useStore();
 
-      // let a = await getrandom()
-      // console.log(a)
-
       onMounted(async () => {
         let a = await getrandom();
         console.log(a);

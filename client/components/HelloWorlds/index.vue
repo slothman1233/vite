@@ -27,7 +27,7 @@
       // console.log(a)
 
       onMounted(async () => {
-        let a = await getrandom();
+        // let a = await getrandom();
         // console.log(a);
       });
 

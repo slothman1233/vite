@@ -7,7 +7,7 @@ const tsProject = ts.createProject('tsconfig.json');
 const ENV = process.env.NODE_ENV || 'prod';
 
 function clean(cb) {
-  return del(['dist'], cb);
+  return del(['dist', 'vitedist', 'run'], cb);
 }
 
 // 输出 js 到 dist目录

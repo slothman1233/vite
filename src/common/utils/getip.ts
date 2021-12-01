@@ -34,6 +34,7 @@ export const getIPAdress = function () {
       }
     }
   }
+  return '0.0.0.0';
 };
 
 //获取外网ip

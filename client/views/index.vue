@@ -1,6 +1,7 @@
 <template>
   <div> {{ title }} </div>
   <div>{{ info }}</div>
+  <div>{{ infos }}</div>
 
   <HelloWorld></HelloWorld>
   <div>
@@ -30,7 +31,6 @@
           infos: {
             requestFun: getrandom,
             callBackFun: (data, res) => {
-              console.log(res);
               res.info = '66';
               return '22';
             },
@@ -38,6 +38,9 @@
         },
         {
           title: 'setupData',
+          //默认值   上面info 会替换掉这个info的值
+          info: {},
+          infos: {},
         },
       );
     },
