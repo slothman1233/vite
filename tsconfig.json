@@ -87,6 +87,7 @@
 , "www.ts", "publicommon/**/*.ts"  ],
   "exclude": [
     "node_modules",
-    "dist"
+    "dist",
+    "gulpfile.js"
   ]
 }

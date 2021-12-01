@@ -7,7 +7,9 @@ const tsProject = ts.createProject('tsconfig.json');
 const ENV = process.env.NODE_ENV || 'prod';
 
 function clean(cb) {
-  return del(['dist'], cb);
+  return del(['dist', 'run', 'vitedist']).then(() => {
+    cb();
+  });
 }
 
 // 输出 js 到 dist目录
@@ -67,6 +69,13 @@ function runNodemon(done) {
     });
 }
 
+function removestrict() {
+  return src(['vitedist/**/*.js'])
+    .pipe(replace(`'use strict'`, ``))
+    .pipe(replace(`"use strict"`, ``))
+    .pipe(dest('vitedist'));
+}
+
 const build = series(
   clean,
   toJs,
@@ -78,5 +87,6 @@ const build = series(
 );
 task('build', build);
 task('default', runNodemon);
+task('removestrict', removestrict);
 exports.build = build;
 exports.default = runNodemon;

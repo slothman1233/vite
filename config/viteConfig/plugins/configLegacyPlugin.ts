@@ -7,7 +7,7 @@ import type { Plugin } from 'vite';
 
 export default (): Plugin | null => {
   return legacy({
-    targets: ['> 1%, last 1 version, ie >= 11'],
+    targets: ['> 1%, last 1 version, ie >= 9'],
     additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
   });
 };

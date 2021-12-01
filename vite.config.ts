@@ -101,7 +101,7 @@ export default defineConfig(({ command, mode }) => {
     build: {
       //浏览器兼容性
       target: 'es2015',
-
+      minify: false,
       // 压缩
       // minify: isProduction ? 'esbuild' : false,
 
@@ -130,6 +130,14 @@ export default defineConfig(({ command, mode }) => {
           };
         })(mode),
 
+        //transform-remove-strict-mode
+        // plugins: [
+        //   babel({
+        //     exclude: 'node_modules/**',
+        //     plugins: ['transform-remove-strict-mode'],
+        //     externalHelpers: true,
+        //   }),
+        // ],
         // 多入口文件打包
         // input: {
         //   main: path.resolve(__dirname, 'index.html'),
