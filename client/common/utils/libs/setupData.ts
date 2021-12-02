@@ -1,6 +1,6 @@
-import { reactive, ref, ToRefs, toRefs } from 'vue';
-import { ResponseData } from '@/services/http';
+import { reactive, ToRefs, toRefs } from 'vue';
 import { UnwrapNestedRefs } from '@vue/reactivity';
+import { ResponseData } from 'publicommon/utils/http';
 
 type callbackType<E, F> = (data: E, res: ToRefs<F>) => any;
 

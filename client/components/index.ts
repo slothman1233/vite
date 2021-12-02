@@ -1,7 +1,7 @@
 import type { App } from 'vue';
 
 export function setupGlobalCom(app: App<Element>) {
-  // Dynamic injection modules
+  //@ts-ignore
   const modulesGlob = import.meta.globEager('./*/index.*');
   Object.keys(modulesGlob).map((key) => {
     // 使用文件夹名称作为comp key

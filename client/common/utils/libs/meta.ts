@@ -220,3 +220,7 @@ export default function createMeta() {
     },
   };
 }
+
+export function setupMeta(app: App<Element>) {
+  app.use(createMeta(), { mixin: true });
+}

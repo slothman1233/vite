@@ -1,9 +1,7 @@
 import type { App, InjectionKey } from 'vue';
 import { createStore, useStore as baseUseStore, Store } from 'vuex';
 import { RootStateTypes } from './interface/index';
-// The import.meta object exposes context-specific metadata to a JavaScript module.
-// It contains information about the module, like the module 's URL.
-// https://developer.mozilla.org/zh-cn/docs/web/javascript/reference/statements/import.meta
+// @ts-ignore
 const modulesGlob = import.meta.globEager('./**/*.ts'),
   modules: any = {};
 // Set global vuex getters
@@ -36,7 +34,7 @@ export function useStore(): Store<RootStateTypes> {
   return baseUseStore(key);
 }
 
-export function setupStore(app: App<Element>): any {
+export function setupStore(app: App<Element>) {
   app.use(store, key);
 }
 

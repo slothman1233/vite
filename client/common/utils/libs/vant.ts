@@ -63,7 +63,7 @@ const components = [
   Popup,
 ];
 
-import vant from 'vant';
+// import vant from 'vant';
 
 export function setupVant(app: App<Element>): void {
   // 设置语言
