@@ -101,9 +101,9 @@ export default defineConfig(({ command, mode }) => {
     build: {
       //浏览器兼容性
       target: 'es2015',
-      minify: false,
+
       // 压缩
-      // minify: isProduction ? 'esbuild' : false,
+      minify: isProduction ? 'esbuild' : false,
 
       //静态文件的输出目录
       assetsDir: VITE_PUBLICDIR_OUT,
