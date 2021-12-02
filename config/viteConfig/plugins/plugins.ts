@@ -9,6 +9,7 @@ import configMockPlugin from './configMockPlugin';
 import configSvgIconsPlugin from './configSvgIconsPlugin';
 // import autoprefixer from 'autoprefixer';
 import configLegacyPlugin from './configLegacyPlugin';
+import configureServerPlugin from './configureServerPlugin';
 // 以下钩子在服务器启动时被调用：
 // options
 // buildStart
@@ -53,5 +54,6 @@ export default (isBuild: boolean, mode: viteMode, viteEnv: ImportMetaEnv) => {
     // configStyleImportPlugin(isBuild)
 
     // autoprefixer,
+    // configureServerPlugin(),
   ];
 };

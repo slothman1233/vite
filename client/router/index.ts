@@ -62,6 +62,7 @@ const routes = [
   },
 ];
 const router = _createRouter({
+  //@ts-ignore
   history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
   routes,
   scrollBehavior() {
