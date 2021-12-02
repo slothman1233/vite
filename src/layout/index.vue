@@ -4,7 +4,9 @@
     <div class="con-box">
       <HeaderNav />
       <Breadcrumb :collapse="isCollapse" @toggleSideBar="toggleSideBar" />
-      <router-view class="app-con"></router-view>
+     <keep-alive>
+                <router-view class="app-con"></router-view>
+            </keep-alive>
     </div>
   </div>
 </template>
