@@ -66,7 +66,7 @@ COPY --from=builddist /web/package.json package.json
 
 COPY --from=builddist /web/pm2.conf.json pm2.conf.json
 #特殊情况下 找不到 cross-env  重新全局安装
-RUN  npm install cross-env -g
+# RUN  npm install cross-env -g
 
 # 暴露端口映射
 ENTRYPOINT command npm run docker:${ev}
