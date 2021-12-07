@@ -178,10 +178,10 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
         template = await vites.transformIndexHtml(url, template);
         if (isSeo) {
           // SEO 同样去掉 JS 代码，否则有 Hydration 警告
-          template = template.replace(
-            `<script type="module" src="/client/entry-client.ts"></script>`,
-            '',
-          );
+          // template = template.replace(
+          //   `<script type="module" src="/client/entry-client.ts"></script>`,
+          //   '',
+          // );
         } else {
           ctx.status = 200;
           ctx.type = 'text/html';
