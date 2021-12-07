@@ -1,5 +1,5 @@
 import { createSSRApp, createApp as _createApp } from 'vue';
-import App from './App';
+import App from './App.vue';
 // import { createRouter } from './router'
 import { setupMeta } from './common/utils/libs/meta';
 import { setupAxios } from './common/utils/libs/axios';

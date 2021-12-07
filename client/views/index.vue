@@ -14,35 +14,22 @@
   import setupData from '@/common/utils/libs/setupData';
   import { getrandom } from '@/services/randomDataService/randomData';
   import HelloWorld from 'comps/HelloWorld.vue';
+import { ResponseData } from 'publicommon/utils/http';
   import { defineComponent } from 'vue';
 
   export default defineComponent({
     name: 'ViewsHome',
     components: { HelloWorld },
-    setup(prop) {
-      return setupData(
-        {
-          info: {
-            requestFun: getrandom,
-            callBackFun: (data, res) => {
-              return '11';
-            },
-          },
-          infos: {
-            requestFun: getrandom,
-            callBackFun: (data, res) => {
-              res.info = '66';
-              return '22';
-            },
-          },
-        },
-        {
-          title: 'setupData',
+    async setup(prop) {
+
+      const data = (await getrandom()) as ResponseData<any>
+      return {
+          title: data.bodyMessage.name,
           //默认值   上面info 会替换掉这个info的值
           info: '3',
           infos: {},
-        },
-      );
+          data
+        };
     },
   });
 </script>

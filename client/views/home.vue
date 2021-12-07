@@ -52,26 +52,11 @@
 
       const config = getConfigModel();
 
-      return setupData(
-        {
-          info: {
-            requestFun: () => {
-              return new Promise((resolve, reject) => {
-                resolve('');
-              });
-            },
-            callBackFun: (data, res) => {
-              console.log(res);
-              res.result = 'HI~Async';
-            },
-          },
-        },
-        {
+      return  {
           msg: config.name,
           title: 'title & sdf33sdf',
           result,
-        },
-      );
+        };
     },
   });
 </script>
