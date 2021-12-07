@@ -15,8 +15,8 @@ export default (): Plugin | null => {
       return () => {
         server.middlewares.use((req: Request, res: Response, next: Next) => {
           // 自定义请求处理...
-          console.log(1);
-          console.log(req.url);
+          // console.log(1);
+          // console.log(req.url);
           next();
         });
       };

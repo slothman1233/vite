@@ -1,11 +1,11 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <h1>f{{ msg }}</h1>
 
   <div>
-    {{ count }}
+    {{ info }}
   </div>
 
-  <HelloWorlds :msg="`sdfsdf`"></HelloWorlds>
+  <HelloWorlds :msg="infos"></HelloWorlds>
 
   <el-row>
     <el-button>Default</el-button>
@@ -34,6 +34,7 @@
   import { getrandom } from 'services/randomDataService/randomData';
   import { useStore } from 'store/index';
   import { ref, defineComponent, computed, onMounted } from 'vue';
+  import setupData from '@/common/utils/libs/setupData';
   // defineProps<{ msg: string }>();
   export default defineComponent({
     name: 'HelloWorld',
@@ -45,14 +46,13 @@
       },
     },
     setup: (prop) => {
-      // console.log(prop.msg)
       const counts = ref(0);
 
       const store = useStore();
 
       onMounted(async () => {
-        let a = await getrandom();
-        console.log(a);
+        // let a = await getrandom();
+        // console.log(a);
       });
 
       const count: any = computed({
@@ -63,7 +63,28 @@
           store.dispatch(App.action.CHANGECOUNT, value);
         },
       });
-      return { count };
+      return setupData(
+        {
+          info: {
+            requestFun: getrandom,
+            callBackFun: (data, res) => {
+              return data.bodyMessage.name;
+            },
+          },
+          infos: {
+            requestFun: getrandom,
+            callBackFun: (data, res) => {
+              // res.info = '66';
+              return '22';
+            },
+          },
+        },
+        {
+          infos: '',
+          info: '',
+          count,
+        },
+      );
     },
   });
 </script>

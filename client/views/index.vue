@@ -3,7 +3,7 @@
   <div>{{ info }}</div>
   <div>{{ infos }}</div>
 
-  <HelloWorld></HelloWorld>
+  <HelloWorld :msg="info"></HelloWorld>
   <div>
     <SvgIcon icon-class="a-bug"></SvgIcon>
     <SvgIcon icon-class="projectManage"></SvgIcon>
@@ -39,7 +39,7 @@
         {
           title: 'setupData',
           //默认值   上面info 会替换掉这个info的值
-          info: {},
+          info: '3',
           infos: {},
         },
       );

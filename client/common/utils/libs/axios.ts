@@ -1,5 +1,6 @@
 import service from '@/services/https';
 import axios, { AxiosRequestConfig } from 'axios';
+import HttpService from 'publicommon/utils/http';
 import { App, inject } from 'vue';
 
 export default function createAxios() {
@@ -12,7 +13,7 @@ export default function createAxios() {
 }
 
 export function getAxios() {
-  return inject<Function>('myAxios');
+  return inject<HttpService>('myAxios');
 }
 
 export function setupAxios(app: App<Element>) {

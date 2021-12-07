@@ -1,6 +1,6 @@
 <template>
-  <h1>{{ msg }}</h1>
   124213423423423432
+  <h1>{{ msg }}</h1>
 </template>
 
 <script lang="ts">
@@ -8,6 +8,7 @@
   import { getrandom } from 'services/randomDataService/randomData';
   import { useStore } from 'store/index';
   import { ref, defineComponent, computed, onMounted } from 'vue';
+  import setupData from '@/common/utils/libs/setupData';
   // defineProps<{ msg: string }>();
   export default defineComponent({
     name: 'HelloWorlds',
@@ -18,7 +19,8 @@
         require: true,
       },
     },
-    setup: () => {
+    setup: (prop, ctx) => {
+      console.log(prop.msg);
       const counts = ref(0);
 
       const store = useStore();
@@ -39,7 +41,13 @@
           store.dispatch(App.action.CHANGECOUNT, value);
         },
       });
-      return { count };
+      return setupData(
+        {},
+        {
+          count,
+          ...prop,
+        },
+      );
     },
   });
 </script>

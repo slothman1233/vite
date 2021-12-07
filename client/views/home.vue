@@ -46,7 +46,7 @@
 
     setup(prop) {
       const { proxy } = getCurrentInstance();
-      console.log(proxy);
+      // console.log(proxy);
       const result = '111';
       // proxy.$configModel.name
 
