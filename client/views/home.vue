@@ -41,6 +41,13 @@
             content: 'ogDescription',
           },
         ],
+        script: {
+          src: ['/asdf/df.js'],
+          js: function () {
+            var a = 1;
+            console.log(a);
+          },
+        },
       };
     },
 
@@ -52,11 +59,11 @@
 
       const config = getConfigModel();
 
-      return  {
-          msg: config.name,
-          title: 'title & sdf33sdf',
-          result,
-        };
+      return {
+        msg: config.name,
+        title: 'title & sdf33sdf',
+        result,
+      };
     },
   });
 </script>

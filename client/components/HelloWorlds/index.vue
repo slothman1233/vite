@@ -8,7 +8,6 @@
   import { getrandom } from 'services/randomDataService/randomData';
   import { useStore } from 'store/index';
   import { ref, defineComponent, computed, onMounted } from 'vue';
-  import setupData from '@/common/utils/libs/setupData';
   // defineProps<{ msg: string }>();
   export default defineComponent({
     name: 'HelloWorlds',
@@ -20,7 +19,6 @@
       },
     },
     setup: (prop, ctx) => {
-      console.log(prop.msg);
       const counts = ref(0);
 
       const store = useStore();
@@ -41,13 +39,10 @@
           store.dispatch(App.action.CHANGECOUNT, value);
         },
       });
-      return setupData(
-        {},
-        {
-          count,
-          ...prop,
-        },
-      );
+      return {
+        count,
+        ...prop,
+      };
     },
   });
 </script>

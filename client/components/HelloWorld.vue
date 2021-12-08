@@ -34,7 +34,7 @@
   import { getrandom } from 'services/randomDataService/randomData';
   import { useStore } from 'store/index';
   import { ref, defineComponent, computed, onMounted } from 'vue';
-  import setupData from '@/common/utils/libs/setupData';
+  import { ResponseData } from 'publicommon/utils/http';
   // defineProps<{ msg: string }>();
   export default defineComponent({
     name: 'HelloWorld',
@@ -45,7 +45,7 @@
         require: true,
       },
     },
-    setup: (prop) => {
+    setup: async (prop) => {
       const counts = ref(0);
 
       const store = useStore();
@@ -55,6 +55,8 @@
         // console.log(a);
       });
 
+      const info = (await getrandom()) as ResponseData<any>;
+
       const count: any = computed({
         get() {
           return store.state.app.count;
@@ -63,28 +65,11 @@
           store.dispatch(App.action.CHANGECOUNT, value);
         },
       });
-      return setupData(
-        {
-          info: {
-            requestFun: getrandom,
-            callBackFun: (data, res) => {
-              return data.bodyMessage.name;
-            },
-          },
-          infos: {
-            requestFun: getrandom,
-            callBackFun: (data, res) => {
-              // res.info = '66';
-              return '22';
-            },
-          },
-        },
-        {
-          infos: '',
-          info: '',
-          count,
-        },
-      );
+      return {
+        infos: '22',
+        info: info.bodyMessage,
+        count,
+      };
     },
   });
 </script>

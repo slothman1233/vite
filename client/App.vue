@@ -1,5 +1,10 @@
 <template>
-  <suspense> <RouterView></RouterView> </suspense>
+  <suspense>
+    <template #default>
+      <RouterView></RouterView>
+    </template>
+    <template #fallback> loading... </template>
+  </suspense>
 </template>
 
 <script lang="ts">

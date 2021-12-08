@@ -191,6 +191,7 @@ async function start() {
   app.use(router.routes()).use(router.allowedMethods());
 
   app.use(async (ctx: Context) => {
+    console.log(ctx.path);
     //给文件添加类型
     const baseurl = path.basename(ctx.path);
     if (/\./.exec(baseurl)) {

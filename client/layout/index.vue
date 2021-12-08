@@ -1,19 +1,23 @@
 <template>
-  <div class="home-layout">
-    <div class="con-box">
-      <Header />
+  <BaseLayout>
+    <template #default>
+      <div class="home-layout">
+        <div class="con-box">
+          <Header />
 
-      <router-view class="app-con"></router-view>
-    </div>
-  </div>
+          <router-view class="app-con"></router-view>
+        </div>
+      </div>
+    </template>
+  </BaseLayout>
 </template>
 
 <script lang="ts">
   import Header from '@/layout/component/header.vue';
-
+  import BaseLayout from './base.vue';
   export default {
     name: 'DefaultLayout',
-    components: { Header },
+    components: { Header, BaseLayout },
     setup() {
       return {};
     },

@@ -85,6 +85,10 @@ export function setupRouter(app: App<Element>): void {
   app.use(router);
 }
 
+// router.beforeEach((to, from, next) => {
+
+// });
+
 export default router;
 
 // export function createRouter() {

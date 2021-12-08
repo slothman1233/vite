@@ -9,11 +9,23 @@ import { RANDOMDATA } from '../RequestPathName';
 //     })
 
 export const getrandom = () =>
-  service
-    .get<any>(RANDOMDATA)
-    .then((response) => {
-      return response;
-    })
-    .catch((e: any) => {
-      console.log(e);
-    });
+  new Promise((resolve, reject) => {
+    service
+      .get<any>(RANDOMDATA)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((e: any) => {
+        reject(e);
+      });
+    // setTimeout(() => {
+    //   service
+    //     .get<any>(RANDOMDATA)
+    //     .then((response) => {
+    //       resolve(response);
+    //     })
+    //     .catch((e: any) => {
+    //       reject(e);
+    //     });
+    // }, 4000);
+  });

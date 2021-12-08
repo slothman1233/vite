@@ -27,13 +27,56 @@ export async function render(app: App, url: RouteLocationRaw, manifest: any) {
   }
 
   //myMeta生成头部信息
-  const _myMeta = app.config.globalProperties.$myMeta.renderToString();
+  const _myMeta = getMeta(url, app);
 
   // Vite生成的SSR清单包含模块->块/资产映射
   //然后我们可以使用它来确定需要预加载哪些文件请求。
 
   const preloadLinks = renderPreloadLinks(ctx.modules, manifest);
   return [html, preloadLinks, _myMeta];
+}
+
+export async function getMeta(url: RouteLocationRaw, app?: App) {
+  let apps = app;
+  if (!app) {
+    apps = createApp();
+    await apps.config.globalProperties.$router.push(url);
+    await apps.config.globalProperties.$router.isReady();
+
+    //通过useSSRContext()传递SSR上下文对象
+    // @vitejs/plugin-vue将代码注入到注册组件的setup()中
+    //在ctx.modules上。渲染后，ctx。模块将包含所有
+    //在渲染调用期间实例化的组件。
+    const ctx: any = {};
+    await renderToString(apps, ctx);
+
+    // 清除 ssrContext provide，防止在使用对象池时，警告 provide 已存在
+    // @ts-ignore
+    if (apps._context.provides[ssrContextKey]) {
+      // @ts-ignore
+      delete apps._context.provides[ssrContextKey];
+    }
+  }
+
+  //myMeta生成头部信息
+  return apps.config.globalProperties.$myMeta.renderToString();
+}
+
+//判端路由是否存在
+export async function hasRoute(url: string, app?: App) {
+  let apps = app;
+
+  if (!app) {
+    apps = createApp();
+  }
+
+  const pathAry: string[] = [];
+
+  apps.config.globalProperties.$router.getRoutes().forEach((item: any) => {
+    pathAry.push(item.path);
+  });
+
+  return pathAry.indexOf(url) >= 0;
 }
 
 function renderPreloadLinks(modules: any[], manifest: commonObject<any>) {

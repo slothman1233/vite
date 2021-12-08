@@ -18,6 +18,10 @@ class MyMeta {
     keywords: '',
     image: '',
     metas: [],
+    script: {
+      src: [],
+      js: '',
+    },
   };
 
   setHead(heads: commonObject<any>) {
@@ -46,6 +50,12 @@ class MyMeta {
           break;
       }
     }
+
+    if (heads.script?.src) this.head.script.src = heads.script?.src;
+    if (heads.script?.js && typeof heads.script?.js === 'function') {
+      this.head.script.js = heads.script?.js.toString();
+    }
+
     this.head.metas = metas;
     //@ts-ignore
     if (!import.meta.env.SSR) {
@@ -126,6 +136,7 @@ class MyMeta {
         },
         ...metas,
       ],
+      script: this.head.script,
     };
   }
   renderToString() {
@@ -164,8 +175,25 @@ class MyMeta {
       ':' +
       date.getSeconds().toString();
     string += `<meta name="updatetime" content="${time}">`;
+
+    string += getscript(heads.script);
     return string;
   }
+}
+
+function getscript(script: any) {
+  const srcAry: string[] = script.src;
+  const js: string = script.js;
+  let str = '';
+  srcAry.forEach((item) => {
+    str += `<script type="text/javascript" src="${item}"></script>`;
+  });
+
+  if (js.length > 0) {
+    str += `<script type="text/javascript">(${js})()</script>`;
+  }
+
+  return str;
 }
 
 // 在 setUp 里使用
