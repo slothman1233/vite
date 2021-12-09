@@ -126,12 +126,6 @@ export default defineComponent({
                     content: 'ogDescription'
                 }
             ],
-            script:{
-                //src 是js文件地址
-                src:[],
-                //js代码 必须是function(){代码}
-                js:function(){}
-            }
         }
     },
     setup() {

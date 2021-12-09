@@ -2,7 +2,7 @@
   <div> {{ title }} </div>
   <div>{{ info }}</div>
   <div>{{ infos }}</div>
-
+  <img src="/assets/image/logo.png" />
   <HelloWorld :msg="info"></HelloWorld>
   <div>
     <SvgIcon icon-class="a-bug"></SvgIcon>
@@ -20,16 +20,18 @@
   export default defineComponent({
     name: 'ViewsHome',
     components: { HelloWorld },
-    async setup(prop) {
-      const { proxy } = getCurrentInstance();
-      const routers = proxy.$router.currentRoute.value;
 
-      onBeforeMount(() => {
-        console.log(routers.path);
-        if (routers.path === '/index') {
-          proxy.$router.replace('/home');
-        }
-      });
+    // beforeRouteEnter(to, from, next) {
+
+    //   if (to.path === '/index') {
+    //     next('/home');
+    //   } else {
+    //     next();
+    //   }
+    // },
+    async setup(prop) {
+      // const { proxy } = getCurrentInstance();
+      // const routers = proxy.$router.currentRoute.value;
 
       const data = (await getrandom()) as ResponseData<any>;
 

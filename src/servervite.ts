@@ -79,10 +79,13 @@ function isSpider(req: Request) {
 
 export default async function createServer(app: koa<koa.DefaultState, koa.DefaultContext>) {
   let vites: vite.ViteDevServer,
-    seoRender: NodeRequire,
+    seoRender: any,
     spaTemplate: string,
     seoTemplate: string,
-    manifest: any;
+    manifest: any,
+    routes: any;
+
+  let template: string, entryServer: any;
   if (!isBuild) {
     let mode = 'dev';
     if (isDev) {
@@ -112,6 +115,7 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
     // // 使用 vite 的 Connect 实例作为中间件
     app.use(koaConnect(vites.middlewares));
 
+    routes = entryServer = await vites.ssrLoadModule(resolve('./client/entry-server.ts'));
     manifest = {};
   } else {
     /**
@@ -123,12 +127,12 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
 
     spaTemplate = fs.readFileSync(resolve('run/client/index.html'), 'utf-8');
     // SEO模版，去掉JS文件引用，爬虫不需要运行 JS，且会有 Hydration 警告，因为服务端与客户端数据不一样，非必要
-    seoTemplate = spaTemplate;
-    // .replace(/<script\b[^>]*>[\s\S]*?<\/script>/, '')
-    // .replace(/<link rel="modulepreload" \b[^>]*>/, '');
+    seoTemplate = spaTemplate
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/, '')
+      .replace(/<link rel="modulepreload" \b[^>]*>/, '');
 
     manifest = require(resolve('run/client/ssr-manifest.json'));
-    seoRender = require(resolve('run/server/entry-server.js'));
+    seoRender = routes = require(resolve('run/server/entry-server.js'));
   }
 
   //引用静态资源
@@ -156,6 +160,13 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
     try {
       const url = ctx.originalUrl;
 
+      //路由不存在直接跳出
+      const isRoute = await routes.hasRoute(url);
+      if (!isRoute) {
+        next();
+        return;
+      }
+
       // // TODO 模拟接口测试
       // if (url === '/list.json') {
       //   ctx.status = 200;
@@ -167,34 +178,24 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
       //   return;
       // }
 
-      let template, entryServer;
-
       if (!isBuild) {
         // 开发环境
-        //meta的初始胡
-        entryServer = await vites.ssrLoadModule(resolve('./client/entry-server.ts'));
 
-        //路由不存在直接跳出
-        const isRoute = await entryServer.hasRoute(url);
-        if (!isRoute) {
-          next();
-          return;
-        }
-
-        const meta = await entryServer.getMeta(url);
         template = fs.readFileSync(resolve('index.html'), 'utf-8');
-        template = template.replace(`<!--meta-->`, meta);
 
         template = await vites.transformIndexHtml(url, template);
+
+        // const meta = await entryServer.getMeta(url);
+        // template = template.replace(`<!--meta-->`, meta);
 
         console.log(url);
 
         if (isSeo) {
           // SEO 同样去掉 JS 代码，否则有 Hydration 警告
-          // template = template.replace(
-          //   `<script type="module" src="/cgetMetalient/entry-client.ts"></script>`,
-          //   '',
-          // );
+          template = template.replace(
+            `<script type="module" src="/client/entry-client.ts"></script>`,
+            '',
+          );
         } else {
           ctx.status = 200;
           ctx.type = 'text/html';
@@ -203,26 +204,24 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
           return;
         }
       } else {
-        //路由不存在直接跳出
-        const isRoute = await (<any>seoRender).hasRoute(url);
-        if (!isRoute) {
-          next();
-          return;
-        }
         // 生产环境代码 SEO 测试
         template = seoTemplate;
         entryServer = seoRender;
+
+        // if (isBuild && (await isSpider(ctx.request))) {
+        //   template = seoTemplate;
+        // } else {
+        //   ctx.status = 200;
+        //   ctx.type = 'text/html';
+        //   ctx.body = spaTemplate;
+
+        if (await isSpider(ctx.request)) {
+          ctx.status = 200;
+          ctx.type = 'text/html';
+          ctx.body = spaTemplate;
+          return;
+        }
       }
-
-      // if (isBuild && (await isSpider(ctx.request))) {
-      //   template = seoTemplate;
-      // } else {
-      //   ctx.status = 200;
-      //   ctx.type = 'text/html';
-      //   ctx.body = spaTemplate;
-
-      //   return;
-      // }
 
       // SSR 渲染
       // 获取实例

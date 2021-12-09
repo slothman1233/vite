@@ -177,6 +177,7 @@ class MyMeta {
     string += `<meta name="updatetime" content="${time}">`;
 
     string += getscript(heads.script);
+
     return string;
   }
 }

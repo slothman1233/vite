@@ -8,6 +8,7 @@ npm版本 8.0.0以上
 
 附加说明
 ```bash
+
   默认去掉了掉redis 跟mysql的连接 需要的话 
 
 1.在app.ts
@@ -19,7 +20,7 @@ npm版本 8.0.0以上
    })
 
    恢复这两段
-2. 在common/config/env 文件修改mysql个redis对应的配置即可
+1. 在common/config/env 文件修改mysql个redis对应的配置即可
 ```
 
 

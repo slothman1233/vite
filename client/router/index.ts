@@ -89,6 +89,9 @@ export function setupRouter(app: App<Element>): void {
 
 // });
 
+// router.afterEach((to, from, next) => {
+// });
+
 export default router;
 
 // export function createRouter() {

@@ -16,7 +16,10 @@ export default (): Plugin | null => {
         server.middlewares.use((req: Request, res: Response, next: Next) => {
           // 自定义请求处理...
           // console.log(1);
-          // console.log(req.url);
+          console.log(1111, req.url);
+          if (req.url === '/home') {
+            console.log(res.body);
+          }
           next();
         });
       };

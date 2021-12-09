@@ -1,7 +1,7 @@
 <template>
   <div>{{ result }}</div>
   <div> <HelloWorld /></div>
-
+  <img src="/assets/image/logo.png" />
   <div>
     <SvgIcon icon-class="a-bug"></SvgIcon>
     <SvgIcon icon-class="projectManage"></SvgIcon>
@@ -41,15 +41,11 @@
             content: 'ogDescription',
           },
         ],
-        script: {
-          src: ['/asdf/df.js'],
-          js: function () {
-            var a = 1;
-            console.log(a);
-          },
-        },
       };
     },
+    // beforeRouteEnter(to, from, next) {
+    //   console.log(to, from, next);
+    // },
 
     setup(prop) {
       const { proxy } = getCurrentInstance();

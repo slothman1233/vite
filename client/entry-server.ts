@@ -27,7 +27,7 @@ export async function render(app: App, url: RouteLocationRaw, manifest: any) {
   }
 
   //myMeta生成头部信息
-  const _myMeta = getMeta(url, app);
+  const _myMeta = await getMeta(url, app);
 
   // Vite生成的SSR清单包含模块->块/资产映射
   //然后我们可以使用它来确定需要预加载哪些文件请求。
