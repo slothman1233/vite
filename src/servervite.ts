@@ -215,7 +215,7 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
         //   ctx.type = 'text/html';
         //   ctx.body = spaTemplate;
 
-        if (await isSpider(ctx.request)) {
+        if (!(await isSpider(ctx.request))) {
           ctx.status = 200;
           ctx.type = 'text/html';
           ctx.body = spaTemplate;
