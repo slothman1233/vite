@@ -3,7 +3,7 @@
     <template #default>
       <RouterView></RouterView>
     </template>
-    <template #fallback> loading... </template>
+    <!-- <template #fallback> loading... </template> -->
   </suspense>
 </template>
 

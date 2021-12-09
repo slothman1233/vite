@@ -37,6 +37,28 @@
 ├── entry-server.ts
 └── main.ts 
 ```
+
+# 所有的布局页必须调用 base.vue 达到继承的效果
+base.vue 里面有作用与全局的处理事件
+
+```javascript
+
+import BaseLayout from './base.vue';
+ <BaseLayout>
+    <template #default>
+      <div class="home-layout">
+        <div class="con-box">
+          <Header />
+
+          <router-view class="app-con"></router-view>
+        </div>
+      </div>
+    </template>
+  </BaseLayout>
+
+```
+
+
 ## 一、SEO渲染 ##
 
 SEO渲染主要需要解决两个问题：
