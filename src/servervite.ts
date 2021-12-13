@@ -197,6 +197,11 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
             '',
           );
         } else {
+          template = template
+            .replace(`<!--meta-->`, '')
+            .replace(`<!--preload-links-->`, '')
+            .replace(`<!--app-html-->`, '')
+            .replace(/\n|\r/gi, '');
           ctx.status = 200;
           ctx.type = 'text/html';
           ctx.body = template;
@@ -208,14 +213,12 @@ export default async function createServer(app: koa<koa.DefaultState, koa.Defaul
         template = seoTemplate;
         entryServer = seoRender;
 
-        // if (isBuild && (await isSpider(ctx.request))) {
-        //   template = seoTemplate;
-        // } else {
-        //   ctx.status = 200;
-        //   ctx.type = 'text/html';
-        //   ctx.body = spaTemplate;
-
         if (!(await isSpider(ctx.request))) {
+          spaTemplate = spaTemplate
+            .replace(`<!--meta-->`, '')
+            .replace(`<!--preload-links-->`, '')
+            .replace(`<!--app-html-->`, '')
+            .replace(/\n|\r/gi, '');
           ctx.status = 200;
           ctx.type = 'text/html';
           ctx.body = spaTemplate;
