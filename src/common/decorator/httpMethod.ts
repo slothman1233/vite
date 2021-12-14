@@ -21,6 +21,7 @@ const Controller = (path: string): ClassDecorator => {
  * @return {MethodDecorator}  方法的装饰器
  */
 const middlewares = (arg: Array<MiddleWare>): MethodDecorator => {
+  // eslint-disable-next-line @typescript-eslint/ban-types
   return (proto: Object, name: string | symbol /* descriptor: TypedPropertyDescriptor<any>*/) => {
     const target = proto.constructor;
     const middlewares = Reflect.getMetadata(MIDDLEWARE, target) || {};
@@ -37,6 +38,7 @@ const middlewares = (arg: Array<MiddleWare>): MethodDecorator => {
 function createMethodDecorator(method: string) {
   // 装饰器接收路由 path 作为参数
   return function httpMethodDecorator(path: string): MethodDecorator {
+    // eslint-disable-next-line @typescript-eslint/ban-types
     return (proto: Object, name: string | symbol /* descriptor: TypedPropertyDescriptor<any>*/) => {
       const taret = proto.constructor;
       const actionObj: Array<RouteMeta> = Reflect.getMetadata(ROUTER_META, taret) || [];

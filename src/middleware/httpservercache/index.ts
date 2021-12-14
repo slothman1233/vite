@@ -1,3 +1,5 @@
+/* eslint-disable no-dupe-else-if */
+/* eslint-disable no-empty */
 import { Context, Next } from 'koa';
 import fs from 'fs-extra';
 import { getType } from 'mime';

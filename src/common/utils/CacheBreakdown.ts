@@ -37,6 +37,7 @@ export async function awaitData(key: string) {
 export async function queryData(key: string, Fun: any) {
   // 这里是个关键，起到占位的用途，后面的请求会通过emitter.eventNames()去判断前面有没有请求去数据库了。也可以使用其他方式实现这个步骤
   //注册进events
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   emitter.once(key, () => {});
   return new Promise((resolve) => {
     //这里为去后台数据库请求的操作，这块使用setTimeout模拟异步操作

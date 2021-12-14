@@ -11,7 +11,6 @@
 <script lang="ts">
   import { getConfigModel } from '@/common/utils/libs/configmodel';
   import { myMeta } from '@/common/utils/libs/meta';
-  import setupData from '@/common/utils/libs/setupData';
   import HelloWorld from 'comps/HelloWorld.vue';
   import { defineComponent, getCurrentInstance } from 'vue';
 
@@ -48,7 +47,7 @@
     // },
 
     setup(prop) {
-      const { proxy } = getCurrentInstance();
+      // const { proxy } = getCurrentInstance();
       // console.log(proxy);
       const result = '111';
       // proxy.$configModel.name

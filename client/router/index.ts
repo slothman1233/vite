@@ -37,6 +37,20 @@ const routes = [
           index: '1',
         },
       },
+      {
+        path: '/upload',
+        component: () => import('@/views/uploadfile.vue'),
+        name: 'Home',
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'carbon:rule-test',
+          isAffix: true,
+          isHide: false,
+          isKeepAlive: true,
+          title: '首页',
+          index: '1',
+        },
+      },
     ],
   },
   {
