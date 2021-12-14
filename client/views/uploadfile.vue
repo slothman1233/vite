@@ -1,5 +1,5 @@
 <template>
-  <UploadFile :listType="'picture-card'" :multiple="true" :limit="10">
+  <UploadFile :listType="'picture-card'" :multiple="true" :limit="10" :fileList="fileList">
     <template #tip>
       <div class="el-upload__tip"> jpg/png files with a size less than 500kb </div>
     </template>
@@ -20,11 +20,13 @@
         </span>
       </div>
     </template>
-  </UploadFile>
 
-  <el-dialog v-model="dialogVisible" :lock-scroll="true" :center="true">
-    <img :src="dialogImageUrl" alt="" style="display: block; margin: auto" />
-  </el-dialog>
+    <template #dialog>
+      <el-dialog v-model="dialogVisible" :lock-scroll="true" :center="true">
+        <img :src="dialogImageUrl" alt="" style="display: block; margin: auto" />
+      </el-dialog>
+    </template>
+  </UploadFile>
 </template>
 
 <script lang="ts">
@@ -34,10 +36,22 @@
     name: 'uploadFile',
 
     async setup(prop) {
+      const fileList = [
+        {
+          name: 'food.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+        },
+        {
+          name: 'food2.jpeg',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+        },
+      ];
+
       const staticData = reactive({
         dialogImageUrl: '',
         dialogVisible: false,
         disabled: false,
+        fileList,
       });
       const refData = toRefs(staticData);
 

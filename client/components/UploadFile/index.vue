@@ -32,9 +32,11 @@ import { defineComponent } from "vue";
     </template>
   </el-upload>
 
-  <el-dialog v-model="dialogVisible" :lock-scroll="true" :center="true">
-    <img :src="dialogImageUrl" alt="" style="display: block; margin: auto" />
-  </el-dialog>
+  <slot name="dialog">
+    <el-dialog v-model="dialogVisible" :lock-scroll="true" :center="true">
+      <img :src="dialogImageUrl" alt="" style="display: block; margin: auto" />
+    </el-dialog>
+  </slot>
 </template>
 <script lang="ts">
   import { defineComponent, reactive, toRefs } from 'vue';
