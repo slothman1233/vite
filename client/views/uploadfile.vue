@@ -1,10 +1,16 @@
 <template>
-  <UploadFile :listType="'picture-card'" :multiple="true" :limit="10" :fileList="fileList">
+  <UploadFile
+    :listType="'picture-card'"
+    :multiple="true"
+    :limit="1"
+    :fileList="fileList"
+    :accept="'image/gif, image/jpeg'"
+  >
     <template #tip>
       <div class="el-upload__tip"> jpg/png files with a size less than 500kb </div>
     </template>
 
-    <template #file="{ file }">
+    <!-- <template #file="{ file }">
       <div>
         <img class="el-upload-list__item-thumbnail" :src="file.url" alt="" />
         <span class="el-upload-list__item-actions">
@@ -19,13 +25,13 @@
           </span>
         </span>
       </div>
-    </template>
+    </template> -->
 
-    <template #dialog>
+    <!-- <template #dialog>
       <el-dialog v-model="dialogVisible" :lock-scroll="true" :center="true">
         <img :src="dialogImageUrl" alt="" style="display: block; margin: auto" />
       </el-dialog>
-    </template>
+    </template> -->
   </UploadFile>
 </template>
 

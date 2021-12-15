@@ -15,6 +15,7 @@ import { defineComponent } from "vue";
     :on-progress="handleProgress"
     :file-list="fileList"
     :disabled="disabled"
+    :accept="accept"
   >
     <slot name="button">
       <el-button size="small" type="primary" v-if="listType == 'fileList'">上传</el-button>
@@ -22,9 +23,7 @@ import { defineComponent } from "vue";
     </slot>
 
     <template #tip>
-      <slot name="tip">
-        <div class="el-upload__tip"></div>
-      </slot>
+      <slot name="tip"> </slot>
     </template>
 
     <template #file="{ file }">
@@ -49,6 +48,8 @@ import { defineComponent } from "vue";
     multiple?: boolean;
     //允许上传的最大数量
     limit?: number;
+    //接受上传的 文件类型（thumbnail-mode 模式下此参数无效）
+    accept?: string;
     //默认文件列表
     fileList?: Array<any>;
     //是否禁用
@@ -82,7 +83,10 @@ import { defineComponent } from "vue";
   /**
    * 文件上传
    * @param {String} listType 上传类型
+   * @param {Object} fileType 文件类型限制，type 文件类型，callback 类型不符合回调 fileTpe 文件类型
+   * @param {Object} fileMaxSize 文件大小限制 默认500kb,size 文件大小,callback 超过后的回调 fileSize 文件大小
    * @param {Array<Object>} fileList 默认显示的文件列表
+   * @param {String} accept 接受上传的 文件类型（thumbnail-mode 模式下此参数无效）
    * @param {Boolean} disabled 是否禁用
    * @param {Boolean} multiple 是否是多图上传
    * @param {Number} limit 允许上传的最大数量
@@ -91,8 +95,7 @@ import { defineComponent } from "vue";
    * @param {Function} successCallback 上传成功后的回调 ((res: any, file: any, fileList: any) => void
    * @param {Function} errorCallback 上传成功后的回调 ((err: any, file: any, fileList: any) => void
    * @param {Function} progressCallback 上传时的回调 ((event: any, file: any, fileList: any) => void
-   * @param {Object} fileType 文件类型限制，type 文件类型，callback 类型不符合回调 fileTpe 文件类型
-   * @param {Object} fileMaxSize 文件大小限制 默认500kb,size 文件大小,callback 超过后的回调 fileSize 文件大小
+   
    */
   export default defineComponent({
     name: 'UploadImg',
@@ -113,6 +116,10 @@ import { defineComponent } from "vue";
         // eslint-disable-next-line vue/require-valid-default-prop
         default: false,
         type: Boolean,
+      },
+      accept: {
+        require: false,
+        type: String,
       },
       multiple: {
         require: false,
@@ -158,7 +165,7 @@ import { defineComponent } from "vue";
         require: false,
         default() {
           // eslint-disable-next-line @typescript-eslint/no-empty-function
-          return { size: 50000 * 1024, callback: (fileSize: number) => {} };
+          return { size: 500 * 1024, callback: (fileSize: number) => {} };
         },
       },
     },
@@ -201,7 +208,7 @@ import { defineComponent } from "vue";
           return false;
         }
 
-        const fileMaxSize = props.fileMaxSize?.size || 50000 * 1024;
+        const fileMaxSize = props.fileMaxSize?.size || 500 * 1024;
         if (fileMaxSize < file.size) {
           console.log(`文件大小不能超过${fileMaxSize / 1024}kb`);
           props.fileMaxSize?.callback && props.fileMaxSize?.callback(file.size);
