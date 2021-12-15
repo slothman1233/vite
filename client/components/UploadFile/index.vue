@@ -16,7 +16,7 @@
     :accept="accept"
     :on-change="changlist"
   >
-    <slot name="button">
+    <!-- <slot name="button">
       <el-button size="small" type="primary" v-if="listType == 'fileList'">上传</el-button>
       <el-icon v-else><plus /></el-icon>
     </slot>
@@ -27,7 +27,7 @@
 
     <template #file="{ file }">
       <slot name="file" :file="file"> </slot>
-    </template>
+    </template> -->
   </el-upload>
 
   <slot name="dialog">
@@ -180,16 +180,7 @@
     },
 
     setup(props: propType, ctx) {
-      // const fileList = [
-      //   {
-      //     name: 'food.jpeg',
-      //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-      //   },
-      //   {
-      //     name: 'food2.jpeg',
-      //     url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
-      //   },
-      // ];
+      let fl = props.fileList || [];
       const staticData = reactive({
         dialogImageUrl: '',
         dialogVisible: false,
@@ -206,6 +197,8 @@
         } else {
           console.log(res, file, fileList);
         }
+
+        staticData.changeList && staticData.changeList(cloneDeep(fileList));
       };
 
       //上传前的回调
@@ -234,6 +227,7 @@
         } else {
           console.log(file, fileList);
         }
+        fl = cloneDeep(fileList);
         staticData.changeList && staticData.changeList(cloneDeep(fileList));
       };
 
@@ -244,6 +238,8 @@
         } else {
           console.log(err, file, fileList);
         }
+
+        staticData.changeList && staticData.changeList(cloneDeep(fileList));
       };
 
       //上传时的回调
@@ -271,7 +267,7 @@
       };
 
       const changlist = (file: any, fileList: any[]) => {
-        staticData.changeList && staticData.changeList(cloneDeep(fileList));
+        fl = cloneDeep(fileList);
       };
 
       return {

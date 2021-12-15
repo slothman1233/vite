@@ -35,6 +35,8 @@
       </el-dialog>
     </template> -->
   </UploadFile>
+
+  <div v-for="(item, i) in fileList" :key="i"> {{ item }} --- {{ i }} </div>
 </template>
 
 <script lang="ts">
