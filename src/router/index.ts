@@ -43,6 +43,11 @@ export const routes: AppRouteRecordRaw[] = [
     name: 'login',
     component: import('@/views/login/login.vue'),
   },
+  {
+    path: '/uploadfile',
+    name: 'uploadfile',
+    component: import('@/views/uploadfile.vue'),
+  },
 ];
 
 export const statroutes: AppRouteRecordRaw[] = [

@@ -25,10 +25,10 @@ let mode = window.configModel.VUE_APP_SSO_MODE;
  */
 function getTokenBasePath() {
   const BasePathAll = new Map([
-    ['dev', 'http://47.113.105.208:8089'],
-    ['test', 'http://47.113.105.208:8189'],
-    ['pre', 'http://47.113.105.208:8087'],
-    ['prod', 'http://47.113.105.208:8086'],
+    ['dev', 'https://oss-dev.tostar.top/'],
+    ['test', 'https://oss-test.tostar.top/'],
+    ['pre', 'https://oss-stage.tostar.top/'],
+    ['prod', 'https://sso.fxshell.cc/'],
   ]);
 
   return BasePathAll.get(mode);
