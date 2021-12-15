@@ -16,7 +16,7 @@
     :accept="accept"
     :on-change="changlist"
   >
-    <!-- <slot name="button">
+    <slot name="button">
       <el-button size="small" type="primary" v-if="listType == 'fileList'">上传</el-button>
       <el-icon v-else><plus /></el-icon>
     </slot>
@@ -27,7 +27,7 @@
 
     <template #file="{ file }">
       <slot name="file" :file="file"> </slot>
-    </template> -->
+    </template>
   </el-upload>
 
   <slot name="dialog">
