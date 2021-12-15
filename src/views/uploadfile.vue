@@ -2,9 +2,11 @@
   <UploadFile
     :listType="'picture-card'"
     :multiple="true"
-    :limit="1"
+    :limit="100"
     :fileList="fileList"
     :accept="'image/gif, image/jpeg'"
+    :handleExceed="handleExceed"
+    :changeList="changelist"
   >
     <template #tip>
       <div class="el-upload__tip"> jpg/png files with a size less than 500kb </div>
@@ -36,13 +38,14 @@
 </template>
 
 <script lang="ts">
+  import { ElMessage } from 'element-plus';
   import { defineComponent, reactive, toRefs } from 'vue';
   // import UploadImg from '@/components/UploadImg/index.vue';
   export default defineComponent({
     name: 'uploadFile',
 
     async setup(prop) {
-      const fileList = [
+      let fileList = [
         {
           name: 'food.jpeg',
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
@@ -52,6 +55,11 @@
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
         },
       ];
+      //图片调整后触发
+      const changelist = (arg: any[]) => {
+        fileList = arg;
+        console.log(fileList);
+      };
 
       const staticData = reactive({
         dialogImageUrl: '',
@@ -72,11 +80,17 @@
         console.log(file);
       };
 
+      const handleExceed = (file: any[], fileList: any) => {
+        ElMessage(`超过了最大数量！`);
+      };
+
       return {
         ...refData,
         handleRemove,
         handlePictureCardPreview,
         handleDownload,
+        handleExceed,
+        changelist,
       };
     },
   });

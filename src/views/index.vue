@@ -11,6 +11,7 @@
     :fileList="fileList"
     :accept="'image/gif, image/jpeg'"
     :handleExceed="handleExceed"
+    :changeList="changelist"
   >
     <template #tip>
       <div class="el-upload__tip"> jpg/png files with a size less than 500kb </div>
@@ -55,7 +56,7 @@
       },
     },
     setup(prop, ctx) {
-      const fileList = [
+      let fileList = [
         {
           name: 'food.jpeg',
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
@@ -73,6 +74,12 @@
         fileList,
       });
       const refData = toRefs(staticData);
+
+      //图片调整后触发
+      const changelist = (arg: any[]) => {
+        staticData.fileList = arg;
+        console.log(staticData.fileList);
+      };
 
       const handleRemove = (file: any) => {
         console.log(file);
@@ -96,6 +103,7 @@
         handlePictureCardPreview,
         handleDownload,
         handleExceed,
+        changelist,
       };
     },
   });
