@@ -129,6 +129,7 @@
     "@types/koa-static": "^4.0.1",
     "@types/koa-views": "^2.0.4",
     "@types/koa2-cors": "^2.0.1",
+    "@types/lodash": "^4.14.178",
     "@types/log4js": "^2.3.5",
     "@types/lru-cache": "^5.1.0",
     "@types/mime": "^2.0.3",

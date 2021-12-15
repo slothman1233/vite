@@ -1,5 +1,3 @@
-import { defineComponent } from "vue";
-
 <template>
   <el-upload
     action="https://jsonplaceholder.typicode.com/posts/"
@@ -16,6 +14,7 @@ import { defineComponent } from "vue";
     :file-list="fileList"
     :disabled="disabled"
     :accept="accept"
+    :on-change="changlist"
   >
     <slot name="button">
       <el-button size="small" type="primary" v-if="listType == 'fileList'">上传</el-button>
@@ -38,6 +37,7 @@ import { defineComponent } from "vue";
   </slot>
 </template>
 <script lang="ts">
+  import { cloneDeep } from 'lodash';
   import { defineComponent, reactive, toRefs } from 'vue';
   // declare var HandleExceedType: (files: File[], fileList: any) => void;
   //(files: File[], fileList: any) => void
@@ -64,6 +64,10 @@ import { defineComponent } from "vue";
     errorCallback: Function | ((err: any, file: any, fileList: any) => void);
     //文件上传时的钩子
     progressCallback: Function | ((event: any, file: any, fileList: any) => void);
+
+    //图片集合调整后的回调
+    //fileList 调整后的图片集合
+    changeList: Function | ((fileList: any) => void);
     //文件类型限制
     //type 文件类型
     //callback 类型不符合回调
@@ -95,6 +99,7 @@ import { defineComponent } from "vue";
    * @param {Function} successCallback 上传成功后的回调 ((res: any, file: any, fileList: any) => void
    * @param {Function} errorCallback 上传成功后的回调 ((err: any, file: any, fileList: any) => void
    * @param {Function} progressCallback 上传时的回调 ((event: any, file: any, fileList: any) => void
+   * @param {Function} changeList 图片集合调整后的回调
    
    */
   export default defineComponent({
@@ -148,6 +153,10 @@ import { defineComponent } from "vue";
         type: Function,
       },
       progressCallback: {
+        require: false,
+        type: Function,
+      },
+      changeList: {
         require: false,
         type: Function,
       },
@@ -219,16 +228,17 @@ import { defineComponent } from "vue";
       };
 
       //删除后的回调
-      const handleRemove = (file: any, fileList: any) => {
+      const handleRemove = (file: any, fileList: any[]) => {
         if (staticData.removeCallback) {
           staticData.removeCallback(file, fileList);
         } else {
           console.log(file, fileList);
         }
+        staticData.changeList && staticData.changeList(cloneDeep(fileList));
       };
 
       //上传错误后的回调
-      const handleAvatarError = (err: any, file: any, fileList: any) => {
+      const handleAvatarError = (err: any, file: any, fileList: any[]) => {
         if (staticData.errorCallback) {
           staticData.errorCallback(err, file, fileList);
         } else {
@@ -237,8 +247,7 @@ import { defineComponent } from "vue";
       };
 
       //上传时的回调
-      const handleProgress = (event: any, file: any, fileList: any) => {
-        console.log(file.percentage);
+      const handleProgress = (event: any, file: any, fileList: any[]) => {
         if (staticData.progressCallback) {
           staticData.progressCallback(event, file, fileList);
         } else {
@@ -253,12 +262,16 @@ import { defineComponent } from "vue";
       };
 
       //文件超出个数限制时的钩子
-      const handleExceeds = (files: File[], fileList: any) => {
+      const handleExceeds = (files: any, fileList: any[]) => {
         if (staticData.handleExceed) {
           staticData.handleExceed(files, fileList);
         } else {
           console.log(`最大上传数量为${staticData.limit}`);
         }
+      };
+
+      const changlist = (file: any, fileList: any[]) => {
+        staticData.changeList && staticData.changeList(cloneDeep(fileList));
       };
 
       return {
@@ -270,6 +283,7 @@ import { defineComponent } from "vue";
         handleAvatarSuccess,
         handleAvatarError,
         handleProgress,
+        changlist,
       };
     },
   });

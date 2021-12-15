@@ -40,7 +40,7 @@ const routes = [
       {
         path: '/upload',
         component: () => import('@/views/uploadfile.vue'),
-        name: 'Home',
+        name: 'upload',
         meta: {
           auth: ['admin', 'test'],
           icon: 'carbon:rule-test',
