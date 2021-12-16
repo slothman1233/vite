@@ -27,9 +27,9 @@
           </span>
         </span>
       </div>
-    </template> -->
+    </template>
 
-    <!-- <template #dialog>
+    <template #dialog>
       <el-dialog v-model="dialogVisible" :lock-scroll="true" :center="true">
         <img :src="dialogImageUrl" alt="" style="display: block; margin: auto" />
       </el-dialog>
@@ -65,6 +65,27 @@
         fileList,
       });
       const refData = toRefs(staticData);
+
+      // setTimeout(() => {
+      //   staticData.fileList = [
+      //     {
+      //       name: 'food.jpeg',
+      //       url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+      //     },
+      //     {
+      //       name: 'food2.jpeg',
+      //       url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+      //     },
+      //     {
+      //       name: 'food.jpeg',
+      //       url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+      //     },
+      //     {
+      //       name: 'food2.jpeg',
+      //       url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100',
+      //     },
+      //   ];
+      // }, 2000);
 
       //图片调整后触发
       const changelist = (arg: any[]) => {
