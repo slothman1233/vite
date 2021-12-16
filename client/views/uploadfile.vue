@@ -40,6 +40,8 @@
 </template>
 
 <script lang="ts">
+  import { fetchRef } from '@/common/utils/libs/customRef';
+  import { getrandom } from '@/services/randomDataService/randomData';
   import { ElMessage } from 'element-plus';
   import { defineComponent, reactive, toRefs } from 'vue';
   // import UploadImg from '@/components/UploadImg/index.vue';

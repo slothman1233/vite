@@ -51,6 +51,20 @@ const routes = [
           index: '1',
         },
       },
+      {
+        path: '/costom',
+        component: () => import('@/views/costomrefdom.vue'),
+        name: 'costomrefdom',
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'carbon:rule-test',
+          isAffix: true,
+          isHide: false,
+          isKeepAlive: true,
+          title: '首页',
+          index: '1',
+        },
+      },
     ],
   },
   {

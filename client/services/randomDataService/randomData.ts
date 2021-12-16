@@ -1,7 +1,7 @@
 // import env from '../../config/env'
 // import http from '../http'
 import service from '../https';
-import { RANDOMDATA } from '../RequestPathName';
+import { RANDOMDATA, RANDOMDATA1 } from '../RequestPathName';
 
 // export const test = () =>
 //     http.get({
@@ -18,14 +18,16 @@ export const getrandom = () =>
       .catch((e: any) => {
         reject(e);
       });
-    // setTimeout(() => {
-    //   service
-    //     .get<any>(RANDOMDATA)
-    //     .then((response) => {
-    //       resolve(response);
-    //     })
-    //     .catch((e: any) => {
-    //       reject(e);
-    //     });
-    // }, 4000);
+  });
+
+export const getrandom1 = () =>
+  new Promise((resolve, reject) => {
+    service
+      .get<any>(RANDOMDATA1)
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((e: any) => {
+        reject(e);
+      });
   });
