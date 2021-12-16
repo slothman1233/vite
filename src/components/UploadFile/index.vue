@@ -14,7 +14,7 @@
     :file-list="fileList"
     :disabled="disabled"
     :accept="accept"
-    :on-change="changlist"
+    :on-change="changstatelist"
   >
     <slot name="button">
       <el-button size="small" type="primary" v-if="listType == 'fileList'">上传</el-button>
@@ -197,23 +197,22 @@
         } else {
           console.log(res, file, fileList);
         }
-
-        staticData.changeList && staticData.changeList(cloneDeep(fileList));
+        changeFileList(fileList);
       };
 
       //上传前的回调
       const beforeAvatarUpload = (file: any) => {
-        const filetype = props.fileType?.type || [];
+        const filetype = staticData.fileType?.type || [];
         if (filetype.length > 0 && filetype.indexOf(file.type) < 0) {
           console.log('文件格式不正确');
-          props.fileType?.callback && props.fileType?.callback(file.type);
+          staticData.fileType?.callback && staticData.fileType?.callback(file.type);
           return false;
         }
 
-        const fileMaxSize = props.fileMaxSize?.size || 500 * 1024;
+        const fileMaxSize = staticData.fileMaxSize?.size || 500 * 1024;
         if (fileMaxSize < file.size) {
           console.log(`文件大小不能超过${fileMaxSize / 1024}kb`);
-          props.fileMaxSize?.callback && props.fileMaxSize?.callback(file.size);
+          staticData.fileMaxSize?.callback && staticData.fileMaxSize?.callback(file.size);
           return false;
         }
 
@@ -227,8 +226,7 @@
         } else {
           console.log(file, fileList);
         }
-        fl = cloneDeep(fileList);
-        staticData.changeList && staticData.changeList(cloneDeep(fileList));
+        changeFileList(fileList);
       };
 
       //上传错误后的回调
@@ -238,8 +236,7 @@
         } else {
           console.log(err, file, fileList);
         }
-
-        staticData.changeList && staticData.changeList(cloneDeep(fileList));
+        changeFileList(fileList);
       };
 
       //上传时的回调
@@ -266,8 +263,16 @@
         }
       };
 
-      const changlist = (file: any, fileList: any[]) => {
+      //文件状态发生变化触发
+      const changstatelist = (file: any, fileList: any[]) => {
+        console.log(fileList);
+      };
+
+      //文件发生变化
+      const changeFileList = (fileList: any[]) => {
         fl = cloneDeep(fileList);
+        staticData.changeList && staticData.changeList(fl);
+        ctx.emit('update:fileList', fl);
       };
 
       return {
@@ -279,7 +284,7 @@
         handleAvatarSuccess,
         handleAvatarError,
         handleProgress,
-        changlist,
+        changstatelist,
       };
     },
   });

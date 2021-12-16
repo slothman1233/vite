@@ -1,9 +1,9 @@
 <template>
   <UploadFile
+    v-model:fileList="fileList"
     :listType="'picture-card'"
     :multiple="true"
     :limit="100"
-    :fileList="fileList"
     :accept="'image/gif, image/jpeg'"
     :handleExceed="handleExceed"
     :changeList="changelist"

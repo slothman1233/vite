@@ -5,10 +5,10 @@
   </div>
 
   <UploadFile
+    v-model:fileList="fileList"
     :listType="'picture-card'"
     :multiple="true"
     :limit="11"
-    :fileList="fileList"
     :accept="'image/gif, image/jpeg'"
     :handleExceed="handleExceed"
     :changeList="changelist"
