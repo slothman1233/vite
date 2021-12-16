@@ -272,6 +272,7 @@
       const changeFileList = (fileList: any[]) => {
         fl = cloneDeep(fileList);
         staticData.changeList && staticData.changeList(fl);
+        ctx.emit('update:fileList', fl);
       };
 
       return {

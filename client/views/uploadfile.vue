@@ -1,9 +1,9 @@
 <template>
   <UploadFile
+    v-model:fileList="fileList"
     :listType="'picture-card'"
     :multiple="true"
     :limit="100"
-    :fileList="fileList"
     :accept="'image/gif, image/jpeg'"
     :handleExceed="handleExceed"
     :changeList="changelist"
@@ -89,8 +89,8 @@
 
       //图片调整后触发
       const changelist = (arg: any[]) => {
-        staticData.fileList = arg;
-        console.log(staticData.fileList);
+        // staticData.fileList = arg;
+        // console.log(staticData.fileList);
       };
 
       const handleRemove = (file: any) => {
