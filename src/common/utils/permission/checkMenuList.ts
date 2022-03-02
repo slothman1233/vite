@@ -35,7 +35,7 @@ function checkMenuList(list: Menu[], routes: AppRouteRecordRaw[]): object[] {
       // 如果是目录则只比对名字 菜单则比对标识
       const hasRoute = isDir
         ? route?.meta?.title === menuName
-        : route?.meta?.permission === permission;
+        : route?.meta?.permission?.split('_')[1] === permission;
       const { children: _children } = route;
       let tempChildren;
       if (hasRoute && hasChildren && _children && _children.length) {
