@@ -1,6 +1,7 @@
 import service from '@/services/https';
 import md5 from 'blueimp-md5';
 import { getCacheCheckTime, setCacheAddTime } from './utils';
+import userInfoDatas from './userInfoDatas';
 /**
  * @param {string} username 用户名
  * @param {string} pwd 密码
@@ -47,11 +48,12 @@ async function login(data: LoginParams): Promise<any> {
 
   if (cache) return JSON.parse(cache);
 
-  const token = await getTken(data).catch((e: Error) => console.error(e));
-  if (!token) return;
+  // const token = await getTken(data).catch((e: Error) => console.error(e));
+  // if (!token) return;
 
-  const userInfoData = await getmenuList(token).catch((e: Error) => console.error(e));
+  //  const userInfoData = await getmenuList(token).catch((e: Error) => console.error(e));
 
+  const userInfoData = userInfoDatas
   //写入缓存
   setUserInfoCache(JSON.stringify(userInfoData));
 
