@@ -8,13 +8,13 @@
   <HelloWorlds :msg="`sdfsdf`"></HelloWorlds>
 
   <el-row>
-    <el-button>Default</el-button>
-    <el-button type="primary">Prima11ry</el-button>
-    <el-button type="success">Su151ccess</el-button>
-    <el-button type="info">Inf45o</el-button>
-    <el-button type="warning">War3ning</el-button>
-    <el-button type="danger">Danger</el-button>
-    <el-button>中文1</el-button>
+    <elButton>Default</elButton>
+    <elButton type="primary">Prima11ry</elButton>
+    <elButton type="success">Su151ccess</elButton>
+    <elButton type="info">Inf45o</elButton>
+    <elButton type="warning">War3ning</elButton>
+    <elButton type="danger">Danger</elButton>
+    <elButton>中文1</elButton>
   </el-row>
 
   <van-button type="default">默认按钮</van-button>
