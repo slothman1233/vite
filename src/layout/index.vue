@@ -13,12 +13,12 @@
 
 <script lang="ts">
   import { getUserInfoCache } from '@/common/utils/permission';
-  import { reactive, toRefs } from 'vue';
+  import { reactive, toRefs, defineComponent } from 'vue';
   import checkMenuList, { Menu } from '@/common/utils/permission/checkMenuList';
   import { statroutes, routes as defaultRoutes } from '@/router';
   import HeaderNav from './component/HeaderNav/index.vue';
 
-  export default {
+  export default defineComponent({
     name: 'DefaultLayout',
     components: { HeaderNav },
     setup() {
@@ -47,7 +47,7 @@
         toggleSideBar,
       };
     },
-  };
+  });
 </script>
 
 <style scoped lang="less">

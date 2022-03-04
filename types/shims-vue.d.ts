@@ -3,6 +3,7 @@ declare module '*.vue' {
   const Component: ReturnType<typeof defineComponent>;
   export default Component;
 }
+declare module 'lodash';
 
 declare module '*.vue' {
   import { DefineComponent } from 'vue';

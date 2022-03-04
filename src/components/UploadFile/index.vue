@@ -57,17 +57,17 @@
     //文件超出个数限制时的钩子
     handleExceed?: Function | ((files: any[], fileList: any) => void);
     //删除文件后的回调
-    removeCallback: Function | ((files: any[], fileList: any) => void);
+    removeCallback?: Function | ((files: any[], fileList: any) => void);
     //上传成功后的回调
-    successCallback: Function | ((res: any, file: any, fileList: any) => void);
+    successCallback?: Function | ((res: any, file: any, fileList: any) => void);
     //上传失败后后的回调
-    errorCallback: Function | ((err: any, file: any, fileList: any) => void);
+    errorCallback?: Function | ((err: any, file: any, fileList: any) => void);
     //文件上传时的钩子
-    progressCallback: Function | ((event: any, file: any, fileList: any) => void);
+    progressCallback?: Function | ((event: any, file: any, fileList: any) => void);
 
     //图片集合调整后的回调
     //fileList 调整后的图片集合
-    changeList: Function | ((fileList: any) => void);
+    changeList?: Function | ((fileList: any) => void);
     //文件类型限制
     //type 文件类型
     //callback 类型不符合回调
@@ -78,7 +78,7 @@
     //文件大小限制 默认500kb
     // size 文件大小
     //callback 超过后的回调
-    fileMaxSize: {
+    fileMaxSize?: {
       size: number;
       callback: (fileSize: number) => void;
     };
