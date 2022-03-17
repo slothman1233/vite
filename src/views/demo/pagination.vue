@@ -8,13 +8,7 @@
 
  -->
 <template>
-  <el-pagination
-    background
-    layout="prev, pager, next"
-    :total="total"
-    :page-size="15"
-    @current-change="currentChange"
-  />
+  <el-pagination background layout="prev, pager, next" :total="total" :page-size="15" />
 </template>
 
 <script lang="ts">
