@@ -39,6 +39,39 @@ export const routes: AppRouteRecordRaw[] = [
     ],
   },
   {
+    path: '/demo',
+    component: Layout,
+    meta: {
+      title: '表格',
+      inTheBar: true,
+      icon: 'Postcard',
+    },
+    children: [
+      {
+        path: 'table',
+        name: 'demoTable',
+        component: import('@/views/demo/table.vue'),
+        meta: {
+          title: '表格示例',
+          inTheBar: true,
+          icon: 'Postcard',
+          permission: `${PROJECT_ID}_2`,
+        },
+      },
+      {
+        path: 'pagination',
+        name: 'demopagination',
+        component: import('@/views/demo/pagination.vue'),
+        meta: {
+          title: '分页示例',
+          inTheBar: true,
+          icon: 'Postcard',
+          permission: `${PROJECT_ID}_2`,
+        },
+      },
+    ],
+  },
+  {
     path: '/login',
     name: 'login',
     component: import('@/views/login/login.vue'),
