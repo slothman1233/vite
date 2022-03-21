@@ -50,7 +50,7 @@ export default defineConfig(({ command, mode }) => {
         //注入全局less变量
         less: {
           javascriptEnabled: true,
-          additionalData: `@import (reference) "./src/styles/public/common/index.less";`,
+          additionalData: `@import (reference) "./src/styles/public/common/index.less";@import (less) "./src/styles/public/index.less";`,
         },
       },
     },

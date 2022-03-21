@@ -21,7 +21,7 @@
   export default defineComponent({
     name: 'DefaultLayout',
     components: { HeaderNav },
-    setup() {
+    setup(prop, ctx) {
       const staticData = reactive({
         isCollapse: false,
         routes: [],

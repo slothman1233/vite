@@ -2,7 +2,7 @@
   <div class="side-bar" :class="{ collapse }">
     <el-menu
       class="sidebar-menu"
-      :default-active="activeMenu"
+      :default-active="activeName"
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
       :unique-opened="false"
@@ -18,9 +18,9 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, getCurrentInstance } from 'vue';
+  import { defineComponent, getCurrentInstance, reactive, toRefs, watch } from 'vue';
   import SideBarItem from '@/layout/component/SildeBar/SideBarItem.vue';
-  // import Logo from './Logo.vue';
+  import { useRoute } from 'vue-router';
 
   export default defineComponent({
     name: 'LayoutSildBar',
@@ -36,12 +36,27 @@
       },
     },
     setup(prop, ctx) {
+      const route = useRoute();
       const variables = {
         menuBg: '#304156',
         menuText: '#bfcbd9',
         menuActiveText: '#409EFF',
       };
       const instance = getCurrentInstance();
+
+      const staticData: { activeName: string } = reactive({
+        activeName: '',
+      });
+      const refData = toRefs(staticData);
+
+      watch(
+        () => route.path,
+        (val, oldval) => {
+          activeMenu();
+          // setTabs(route);
+        },
+      );
+
       let that = instance?.appContext.config.globalProperties;
 
       // eslint-disable-next-line no-undef
@@ -91,13 +106,13 @@
       };
 
       const activeMenu = () => {
-        console.log(that?.$route?.fullPath.split('?')[0]);
-        return that?.$route?.fullPath.split('?')[0];
+        staticData.activeName = that?.$route?.fullPath.split('?')[0];
       };
+      activeMenu();
 
       return {
+        ...refData,
         navData: navData(),
-        activeMenu: activeMenu(),
         variables,
       };
     },

@@ -23,7 +23,7 @@
   import { useRoute, useRouter } from 'vue-router';
   export default defineComponent({
     name: 'layoutTabs',
-    setup() {
+    setup(props, ctx) {
       const route = useRoute();
       const router = useRouter();
       const staticData: { tabs: any[]; activeName: string } = reactive({
@@ -66,7 +66,7 @@
 
       const handleClick = (tab: any) => {
         const { fullPath } = route;
-        const path = tab.$attrs.route;
+        const path = tab.instance.attrs.route;
         if (fullPath === path) {
           return;
         }

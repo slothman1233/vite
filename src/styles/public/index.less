@@ -1,25 +1,104 @@
-html * {outline: 0;-webkit-text-size-adjust: none;-webkit-tap-highlight-color: rgba(0,0,0,0);font-family:'微软雅黑',sans-serif,'宋体',Arial;}
-body { margin:0; width:100%;font-family:'微软雅黑',sans-serif,'宋体',Arial;font-size:14px;  -webkit-font-smoothing: antialiased;    -moz-osx-font-smoothing: grayscale;}
-*{word-wrap: break-word;font-style: normal;}
-h1, h2, h3, h4, h5, h6 ,img ,dl,dt,dd,ul,li,p,table,td,th{margin: 0;padding: 0;border:0;font-weight: normal;}
-h1{font-size:22px;} 
-h2{font-size:18px;}
-h3{font-size:16px;}
-h4{font-size:13px;}
-input,textarea{margin: 0;padding: 0;resize: none;outline: none;    border: none;}
-ul,li{list-style-type: none;}
-em{font-style: normal;}
-a:link,a:visited,a:hover,a:active{text-decoration: none;}
-a{color:@FontColor_1;}
-a:hover{color: @MainColor_5;}
+html * {
+    outline: 0;
+    -webkit-text-size-adjust: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: '微软雅黑', sans-serif, '宋体', Arial;
+}
 
-body, html {
+body {
+    margin: 0;
+    width: 100%;
+    font-family: '微软雅黑', sans-serif, '宋体', Arial;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+    word-wrap: break-word;
+    font-style: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+img,
+dl,
+dt,
+dd,
+ul,
+li,
+p,
+table,
+td,
+th {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+}
+
+h1 {
+    font-size: 22px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 13px;
+}
+
+input,
+textarea {
+    margin: 0;
+    padding: 0;
+    resize: none;
+    outline: none;
+    border: none;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+em {
+    font-style: normal;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
+}
+
+a {
+    color: @FontColor_1;
+}
+
+a:hover {
+    color: @MainColor_5;
+}
+
+body,
+html {
     height: 100%;
     width: 100%;
     min-width: 1440px;
 }
 
-#app, html {
+#app,
+html {
     height: 100%;
     width: 100%;
 }
@@ -27,4 +106,28 @@ body, html {
 .el-icon svg {
     height: 1em;
     width: 1em;
+}
+
+//全局行布局
+.pub_line {
+    clear: both;
+    overflow: hidden;
+    margin: @space_2;
+
+    .left {
+        float: left;
+    }
+
+    .right {
+        float: right;
+    }
+}
+
+.pub_input {
+    @height: 32px;
+    height: 32px;
+    border: 1px solid #CCC;
+    input{
+        padding: 0 @space_1;
+    }
 }

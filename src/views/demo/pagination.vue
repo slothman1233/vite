@@ -35,7 +35,6 @@
       },
     },
     setup(props: propType, ctx: Context) {
-      const { attrs } = ctx;
       //   ctx.attrs.onCurrentChange;
       const staticData = reactive({
         tableData: [],

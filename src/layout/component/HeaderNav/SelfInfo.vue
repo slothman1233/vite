@@ -1,10 +1,3 @@
-<!--
- * @Description:
- * @Version: 0.1
- * @Author: EveChee
- * @Date: 2020-05-27 14:57:52
- * @LastEditTime: 2020-06-05 08:58:14
--->
 <template>
   <el-dropdown @command="handleCommand">
     <div class="self-info">

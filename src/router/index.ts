@@ -58,17 +58,6 @@ export const routes: AppRouteRecordRaw[] = [
           permission: `${PROJECT_ID}_2`,
         },
       },
-      {
-        path: 'pagination',
-        name: 'demopagination',
-        component: import('@/views/demo/pagination.vue'),
-        meta: {
-          title: '分页示例',
-          inTheBar: true,
-          icon: 'Postcard',
-          permission: `${PROJECT_ID}_2`,
-        },
-      },
     ],
   },
   {

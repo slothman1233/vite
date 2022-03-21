@@ -15,6 +15,17 @@
  -->
 
 <template>
+  <div class="pub_line">
+    <div class="left"> <Cascader @change="handleChange" /> </div>
+    <div class="right">
+      <div class="pub_input">
+        <!-- <el-input v-model="searchinput" placeholder="请输入搜索内容" /> -->
+        <input v-model="searchinput" placeholder="请输入搜索内容" />
+        <el-button type="primary">搜索</el-button>
+      </div>
+    </div>
+  </div>
+
   <el-table
     ref="multipleTableRef"
     highlight-current-row
@@ -85,20 +96,25 @@
       </template>
     </el-table-column>
   </el-table>
-  <div>
-    <el-button class="mt-4" @click="onAddItem">添加一行</el-button>
-    <el-button @click="toggleSelection([tableData[1], tableData[2]])">选中第 2 3项</el-button>
-    <el-button @click="toggleSelection()">取消全部勾选</el-button>
+
+  <div class="pub_line">
+    <div class="left">
+      <el-button class="mt-4" @click="onAddItem">添加一行</el-button>
+      <el-button @click="toggleSelection([tableData[1], tableData[2]])">选中第 2 3项</el-button>
+      <el-button @click="toggleSelection()">取消全部勾选</el-button>
+    </div>
+    <div class="right">
+      <!-- 分页 -->
+      <Pagination
+        :total="100"
+        :pageSize="10"
+        @next-click="nextClick"
+        @prev-click="prevClick"
+        @current-change="currentChange"
+        @size-change="pageChange"
+      />
+    </div>
   </div>
-  <!-- 分页 -->
-  <Pagination
-    :total="100"
-    :pageSize="10"
-    @next-click="nextClick"
-    @prev-click="prevClick"
-    @current-change="currentChange"
-    @size-change="pageChange"
-  />
 </template>
 
 <script lang="ts">
@@ -108,13 +124,14 @@
   import { tableModel } from '@/model/demo/table';
   import { TableColumnCtx } from 'element-plus/es/components/table/src/table-column/defaults';
   import Pagination from './pagination.vue';
+  import Cascader from './cascader.vue';
   type staticDataModel = {
     tableData: tableModel[];
   };
 
   export default defineComponent({
     name: 'demoTables',
-    components: { Pagination },
+    components: { Pagination, Cascader },
     setup() {
       const staticData: staticDataModel = reactive({
         tableData: [],
@@ -122,7 +139,7 @@
       const refData = toRefs(staticData);
       const multipleTableRef = ref<InstanceType<typeof ElTable>>();
       const multipleSelection = ref<tableModel[]>([]);
-
+      const searchinput = ref('');
       //获取列表数据
       tabledata().then((data) => {
         console.log(data?.bodyMessage);
@@ -202,6 +219,10 @@
         console.log('prevClick', i);
       };
 
+      const handleChange = (value: any) => {
+        console.log(123123, value);
+      };
+
       return {
         ...refData,
         deleteRow,
@@ -217,6 +238,8 @@
         nextClick,
         currentChange,
         prevClick,
+        searchinput,
+        handleChange,
       };
     },
   });
@@ -226,5 +249,17 @@
   body {
     color: @FontColor_1;
     display: flex;
+  }
+</style>
+
+<style lang="less" scoped>
+  .menu {
+    margin: @space_2;
+    text-align: right;
+  }
+
+  .pagination {
+    margin: @space_2;
+    text-align: right;
   }
 </style>
