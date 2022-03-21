@@ -42,7 +42,7 @@ export const routes: AppRouteRecordRaw[] = [
     path: '/demo',
     component: Layout,
     meta: {
-      title: '表格',
+      title: '示例',
       inTheBar: true,
       icon: 'Postcard',
     },
@@ -53,6 +53,17 @@ export const routes: AppRouteRecordRaw[] = [
         component: import('@/views/demo/table.vue'),
         meta: {
           title: '表格示例',
+          inTheBar: true,
+          icon: 'Postcard',
+          permission: `${PROJECT_ID}_2`,
+        },
+      },
+      {
+        path: 'layout',
+        name: 'demoLayout',
+        component: import('@/views/demo/layout.vue'),
+        meta: {
+          title: '左右布局',
           inTheBar: true,
           icon: 'Postcard',
           permission: `${PROJECT_ID}_2`,
