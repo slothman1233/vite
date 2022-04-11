@@ -1,6 +1,10 @@
 # 基于 vite+vue3+mock的web端框架
 
-
+运行要求
+```bash
+node版本 v16.13.0
+npm版本 8.0.0以上
+```
 
 命令介绍
 ```bash
