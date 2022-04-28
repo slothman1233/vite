@@ -18,6 +18,13 @@ npm run build:mock ----- 打包生产代码带mock的
 npm run serve ----- 运行生产代码
 ```
 
+dock命令
+```bash
+docker build -t vite . --build-arg env=pre --tag op:1
+
+docker run -d -p :5000:5050  op:1 
+```
+
 开发方式
 ```bash
 1.在views里面创建vue的页面 
