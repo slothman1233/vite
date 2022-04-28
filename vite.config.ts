@@ -82,7 +82,7 @@ export default defineConfig(({ command, mode }) => {
 
     server: {
       // 是否自动打开浏览器
-      open: true,
+      open: false,
       // 服务器主机名，如果允许外部访问，可设置为"0.0.0.0"
       host: VITE_HOST,
       // 服务器端口号
