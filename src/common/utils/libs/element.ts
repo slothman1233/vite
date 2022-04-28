@@ -184,6 +184,8 @@ import ElementPlus from 'element-plus';
 // 统一导入el-icon图标
 import * as ElIconModules from '@element-plus/icons';
 
+import lang from 'element-plus/lib/locale/lang/zh-cn';
+
 // utils/utils.js
 // 将el-icon的组件名称AbbbCddd转化为i-abbb-cddd形式
 // 此前用switch做组件名时因关键字重复报错，所以格式统一加了前缀
@@ -208,7 +210,7 @@ export function setupElementPlus(app: App<Element>): void {
     app.component(ElIconModules[iconName].name, ElIconModules[iconName].render());
   }
 
-  app.use(ElementPlus);
+  app.use(ElementPlus, { locale: lang });
   // app.use(Icons.Location);
   // 全局配置
   app.config.globalProperties.$ELEMENT = { size: 'small', zIndex: 3000 };
