@@ -10,7 +10,4 @@ export type propType = {};
  */
 export type refType = {};
 
-/**
- * setUp 返回的模型
- */
-export type setUpModel = refType & baseSetUpModel;
+
