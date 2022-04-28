@@ -4,10 +4,10 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { propType, setUpModel } from './model';
+  import { propType } from './model';
   export default defineComponent({
     name: 'cpmDome',
-    setup(props: propType, ctx): setUpModel {
+    setup(props: propType, ctx) {
       return {};
     },
   });
