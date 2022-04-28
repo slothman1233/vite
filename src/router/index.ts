@@ -115,7 +115,7 @@ export const statroutes: AppRouteRecordRaw[] = [
       {
         path: 'list',
         name: 'QsList',
-        component: import('@/views/qs/list.vue'),
+        component: import('@/views/qs/index.vue'),
         meta: {
           title: '问答列表',
           inTheBar: true,
