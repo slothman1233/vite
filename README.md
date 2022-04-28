@@ -25,6 +25,15 @@ npm run serve ----- 运行生产代码
 2.在routes里面创建对应的路由
 ```
 
+docker命令
+```bash
+
+docker build -t vite . --build-arg env=pre --tag op:1
+
+docker run -d -p :5000:5050  op:1 
+
+```
+
 创建页面说明（示例在view里面的qs）
 ```bash
 
