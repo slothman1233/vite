@@ -155,6 +155,7 @@
     .sidebar-menu {
       height: 100%;
       border: none;
+      background: rgb(17, 130, 251);
     }
   }
 </style>
