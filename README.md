@@ -24,6 +24,19 @@ npm run serve ----- 运行生产代码
 2.在routes里面创建对应的路由
 ```
 
+创建页面说明（示例在view里面的qs）
+```bash
+
+页面文件夹
+│   ├── index 页面
+│   ├── model 当前页面的模型文件
+│   ├── components 针对当前页面的 控件文件夹
+│   │   └──  cpmDemo 控件 文件名 
+│   │   │   ├── index 控件页面
+│   │   │   └── model 当前控件的模型文件
+
+```
+
 目录说明
 ```
 ├── config  vite的配置文件
@@ -79,6 +92,13 @@ npm run serve ----- 运行生产代码
 │   │   │   │   └── index.less 全局函数式样式（默认注入）
 │   │   │   └── index.less 全局默认样式（默认注入）
 │   ├── views vue页面
+│   │   ├── qs 示例页面
+│   │   │   ├── index 页面
+│   │   │   ├── model 当前页面的模型文件
+│   │   │   ├── components 针对当前页面的 控件文件夹
+│   │   │   │   └──  cpmDemo 控件 文件名 
+│   │   │   │   │   ├── index 控件页面
+│   │   │   │   │   └── model 当前控件的模型文件
 │   ├── App.ts
 │   ├── main.ts 
 │   ├── types  ts全局声明

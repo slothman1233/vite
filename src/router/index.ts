@@ -38,6 +38,27 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/qs',
+    component: Layout,
+    redirect: 'qs',
+    children: [
+      {
+        path: 'index',
+        name: 'index',
+        component: import('@/views/qs/index.vue'),
+        meta: {
+          auth: ['admin', 'test'],
+          icon: 'carbon:rule-test',
+          isAffix: true,
+          isHide: false,
+          isKeepAlive: true,
+          title: '首页',
+          index: '1',
+        },
+      },
+    ],
+  },
 ];
 
 const router = createRouter({
