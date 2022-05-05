@@ -69,3 +69,23 @@
     },
   });
 </script>
+
+<style scoped lang="less">
+.el-menu-item {
+  width: 160px;
+  min-width: 160px;
+  &:hover {
+    background-color: Lighten(@sidbar_bg, 10%);
+  }
+  &.is-active {
+    background-color: #fff;
+    color: @sidbar_bg;
+  }
+}
+
+.el-sub-menu {
+  :deep(.el-menu) {
+    background: rgb(17, 130, 251) !important;
+  }
+}
+</style>
