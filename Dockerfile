@@ -11,7 +11,7 @@ COPY package.json ./
 
 COPY package-lock.json ./
 
-RUN npm install
+RUN npm install --force
 
 
 #获取生产文件
@@ -26,6 +26,20 @@ COPY . .
 
 RUN npm run build:${env}
 
+#下载生产的node_modules
+FROM node:16 as distnodemodules
+
+# 切换为阿里源
+RUN npm config set registry https://registry.npmmirror.com/
+
+WORKDIR /web
+
+COPY package.json ./
+
+COPY package-lock.json ./
+
+RUN  npm install --production
+
 
 #产出生产镜像
 FROM node:16-alpine
@@ -36,7 +50,11 @@ RUN echo 'Asia/Shanghai' >/etc/timezone
 
 WORKDIR /web
 
-COPY --from=builddist /web ./
+COPY --from=distnodemodules /web/node_modules ./node_modules
+
+COPY --from=builddist /web/dist ./dist
+
+COPY . .
 
 
 # 暴露端口映射

@@ -1,4 +1,5 @@
 # 基于 vite+vue3+mock的web端框架
+安装npm 依赖  必须使用 npm install --force 安装
 
 运行要求
 ```bash
