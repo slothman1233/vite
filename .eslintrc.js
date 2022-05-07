@@ -29,12 +29,7 @@ module.exports = {
         },
       },
     ],
-    'vue/multi-word-component-names': [
-      'error',
-      {
-        ignores: [],
-      },
-    ],
+    'vue/multi-word-component-names': 0,
   },
   overrides: [
     {
