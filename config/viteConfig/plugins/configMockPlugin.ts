@@ -7,8 +7,8 @@ import path from 'path';
 import env from '../../../client/common/config/mock';
 
 // eslint-disable-next-line no-global-assign
-window = {};
-window.configModel = env;
+//window = {};
+//window.configModel = env;
 export default function configMockPlugin(
   useMock = true,
   isBuild: boolean,
